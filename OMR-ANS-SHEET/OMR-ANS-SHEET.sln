@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnswerSheetChecker", "Answe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OMR", "OMR\OMR.csproj", "{1964F957-E7C5-4209-97E4-5D45DC552504}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestOMR", "TestOMR\TestOMR.csproj", "{8BBF5B32-9480-4149-8884-B5EFAA423502}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{1964F957-E7C5-4209-97E4-5D45DC552504}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1964F957-E7C5-4209-97E4-5D45DC552504}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1964F957-E7C5-4209-97E4-5D45DC552504}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BBF5B32-9480-4149-8884-B5EFAA423502}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BBF5B32-9480-4149-8884-B5EFAA423502}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BBF5B32-9480-4149-8884-B5EFAA423502}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BBF5B32-9480-4149-8884-B5EFAA423502}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
