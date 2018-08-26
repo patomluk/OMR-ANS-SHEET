@@ -28,6 +28,7 @@ namespace AnswerSheetChecker
             Template,
             CreateTamplate,
             KeyAnswer,
+            CreateKey,
             AnswerSheet,
             Result,
         }
@@ -61,6 +62,9 @@ namespace AnswerSheetChecker
                     break;
                 case PageState.KeyAnswer:
                     InitializePageKeyAnswer();
+                    break;
+                case PageState.CreateKey:
+                    InitializedCreateKey();
                     break;
                 case PageState.AnswerSheet:
                     InitializePageAnswerSheet();
@@ -108,7 +112,7 @@ namespace AnswerSheetChecker
             textBlockNamePage.Text = "สร้างรูปแบบกระดาษคำตอบใหม่";
             var richText = AddTextBlock(gridContent, new Thickness(20, 20, 20, 20), 20);
             richText.Text = "\tเรียกข้อมูล" +
-                "\n\tเรียกข้อมูล คือ เลือกรูปกระดาษคำตอบเพื่อนำมาใช้สร้างต้นแบบกระดาษตรวจคำตอบ (.jpg)";
+                "\n\tเรียกข้อมูล คือ เลือกรูปกระดาษคำตอบมาสร้างต้นแบบกระดาษตรวจคำตอบ (.jpg) ";
             AddButton(gridBottonR, new Size(100, gridBotton.Height), "เรียกข้อมูล", () =>
             {
                 var opFile = new OpenFileDialog()
@@ -130,13 +134,11 @@ namespace AnswerSheetChecker
             textBlockNamePage.Text = "ตั้งค่าเฉลยคำตอบ";
             var richText = AddTextBlock(gridContent, new Thickness(20, 20, 20, 20), 20);
             richText.Text = "\tสร้าง" +
-                "\n\tสร้าง คือ การสร้างเฉลยจากรูปกระดาษคำตอบที่ได้เลือกมา" +
-                "\n\n\tอ่านจากต้นแบบ" +
-                "\n\tอ่านจากต้นแบบ คือ การใช้รูปกระดาษคำตอบที่มีการฝนเฉลยไว้แล้ว มาทำเฉลย" +
+                "\n\tสร้าง คือ เลือกวิธีสร้างเฉลยคำตอบ" +
                 "\n\n\tเรียกข้อมูล" +
                 "\n\tเรียกข้อมูล คือ เรียกไฟล์เฉลยที่ได้ทำการสร้างไว้กับโปรแกรมไว้แล้ว (.ask)";
-            AddButton(gridBottonR, new Size(100, gridBotton.Height), "สร้าง", () => { /*ChangeState(PageState.Result);*/ });
-            AddButton(gridBottonR, new Size(100, gridBotton.Height), "อ่านจากต้นแบบ", () => { /*ChangeState(PageState.Result);*/ });
+            AddButton(gridBottonR, new Size(100, gridBotton.Height), "สร้าง", () => { ChangeState(PageState.CreateKey); });
+            /*AddButton(gridBottonR, new Size(100, gridBotton.Height), "อ่านจากต้นแบบ", () => { ChangeState(PageState.Result); });*/
             AddButton(gridBottonR, new Size(100, gridBotton.Height), "เรียกข้อมูล", () =>
             {
                 var opFile = new OpenFileDialog()
@@ -149,6 +151,18 @@ namespace AnswerSheetChecker
                     ChangeState(PageState.AnswerSheet);
                 }
             });
+            AddButton(gridBottonL, new Size(100, gridBotton.Height), "ย้อนกลับ", () => { ChangeState(PageState.Template); });
+        }
+
+        void InitializedCreateKey()
+        {
+            textBlockNamePage.Text = "เลือกวิธีเฉลยคำตอบ";
+            var richText = AddTextBlock(gridContent, new Thickness(20, 20, 20, 20), 20);
+            richText.Text = "\tสร้าง" +
+                "\n\tสร้างเฉลยใหม่ คือ การสร้างเฉลยจากรูปกระดาษคำตอบที่ได้เลือกมา" +
+                "\n\n\tอ่านจากต้นแบบ" +
+                "\n\tอ่านจากต้นแบบ คือ การใช้รูปกระดาษคำตอบที่มีการฝนเฉลยไว้แล้ว มาทำเฉลย" ;
+            AddButton(gridBottonR, new Size(100, gridBotton.Height), "สร้างเฉลยใหม่", () => { ChangeState(PageState.CreateKey); });
             AddButton(gridBottonL, new Size(100, gridBotton.Height), "ย้อนกลับ", () => { ChangeState(PageState.Template); });
         }
 
@@ -209,6 +223,14 @@ namespace AnswerSheetChecker
             return button;
         }
 
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            var result = MessageBox.Show("คุณกำลังจะปิดโปรแกรม", "Exit Program", MessageBoxButton.YesNo);
 
+            if (result == MessageBoxResult.No)
+            {
+                e.Cancel = true;
+            } 
+        }
     }
 }
