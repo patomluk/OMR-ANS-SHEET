@@ -5,9 +5,44 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AnswerSheetChecker"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="An Answer Scoring By Image Procressing" Height="720" Width="1280" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" Cursor="Arrow">
     <Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="295,210,0,0" VerticalAlignment="Top" Width="75"/>
-
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="775*"/>
+            <ColumnDefinition Width="499*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Background="#FF0051FF" HorizontalAlignment="Left" Width="480" Margin="0,0,0,32">
+            <WrapPanel x:Name="gridTextSideManu" Margin="20,20,0,20"/>
+        </Grid>
+        <Grid x:Name="gridBotton" Background="#FF00FFF3" Height="32" VerticalAlignment="Bottom" Grid.ColumnSpan="2">
+            <WrapPanel x:Name="gridBottonL" Orientation="Horizontal" HorizontalAlignment="Left">
+                <WrapPanel.Resources>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Margin" Value="5,0" />
+                        <Setter Property="Padding" Value="0,0" />
+                    </Style>
+                </WrapPanel.Resources>
+            </WrapPanel>
+            <WrapPanel x:Name="gridBottonR" Orientation="Horizontal" HorizontalAlignment="Right">
+                <WrapPanel.Resources>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Margin" Value="5,0" />
+                        <Setter Property="Padding" Value="0,0" />
+                    </Style>
+                </WrapPanel.Resources>
+            </WrapPanel>
+        </Grid>
+        <Grid Margin="480,0,0,0" Background="#FF29ECFF" Height="72" VerticalAlignment="Top" Grid.ColumnSpan="2">
+            <TextBlock x:Name="textBlockNamePage" Margin="30,10,30,6" TextWrapping="Wrap" Text="ชื่อหัวข้อ" FontSize="48" FontFamily="TH Sarabun New" FontWeight="Bold"/>
+        </Grid>
+        <Grid x:Name="gridContent" Margin="480,72,0,32" Grid.ColumnSpan="2">
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF5E92EE" Offset="0.903"/>
+                    <GradientStop Color="White" Offset="0.39"/>
+                    <GradientStop Color="#FF5E92EE" Offset="0.977"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+        </Grid>
     </Grid>
 </Window>
