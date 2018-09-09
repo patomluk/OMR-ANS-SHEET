@@ -10,8 +10,7 @@ namespace OMR
 {
     public class OMRv1 : IOMR
     {
-
-        public (List<Point> pointsList, List<int> rowSize) GetPositionPoint(bool getCheck = false)
+        (List<PointProperty> pointsList, List<int> rowSize) IOMR.GetPositionPoint(bool getCheck)
         {
             throw new NotImplementedException();
         }
