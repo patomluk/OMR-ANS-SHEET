@@ -13,6 +13,6 @@ namespace OMR
 
     public interface IOMR
     {
-        (List<Point> pointsList, List<int> rowSize) GetPositionPoint(bool getCheck = false);
+        (List<PointProperty> pointsList, List<int> rowSize) GetPositionPoint(bool getCheck = false);
     }
 }
