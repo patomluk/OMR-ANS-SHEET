@@ -128,11 +128,11 @@ namespace AnswerSheetChecker
                     System.Drawing.Bitmap bitmap = null;
                     switch (ext)
                     {
-                        case "png":
-                        case "jpg":
+                        case ".png":
+                        case ".jpg":
                             bitmap = new System.Drawing.Bitmap(opFile.FileName);
                             break;
-                        case "pdf":
+                        case ".pdf":
                             break;
                         default:
                             break;
