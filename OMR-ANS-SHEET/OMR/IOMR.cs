@@ -11,7 +11,7 @@ namespace OMR
         public Point Position { get; }
     }
 
-    interface IOMR
+    public interface IOMR
     {
         /// <summary>
         /// Get position and pixel of total point in image support only format rgb888 (bpp 3)
@@ -22,6 +22,6 @@ namespace OMR
         /// <param name="pitch">image pitch</param>
         /// <param name="points">out put of point property</param>
         /// <returns>result if success return true else return false</returns>
-        bool GetPositionPoint(byte[] data, int width, int height, int pitch, out List<PointProperty> points, out int pointSize);
+        bool GetPositionPoint(Bitmap bitmap, out List<PointProperty> points, out int pointSize);
     }
 }

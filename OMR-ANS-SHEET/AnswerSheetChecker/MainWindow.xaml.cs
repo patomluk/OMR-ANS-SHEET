@@ -34,10 +34,12 @@ namespace AnswerSheetChecker
         }
 
         private PageState _state;
+        private OMR.IOMR omr;
 
         public MainWindow()
         {
             InitializeComponent();//ห้ามพิมพ์คำสั่งใดๆก่อนหน้านี้
+            omr = new OMR.OMRv1();
             ChangeState(PageState.Welcome);
         }
 
@@ -118,10 +120,25 @@ namespace AnswerSheetChecker
                 var opFile = new OpenFileDialog()
                 {
                     Title = "เรียกต้นแบบกระดาษคำตอบ",
-                    Filter = "JPEG Image (*.jpg)|*.jpg|Adobe Portable Document Format(*.pdf)|*.pdf",
+                    Filter = "Image (*.jpg *.png)|*.jpg;*.png|Adobe Portable Document Format(*.pdf)|*.pdf",
                 };
                 if (opFile.ShowDialog() == true) /* ข้อมูลตารางจากรูป*/
                 {
+                    string ext = System.IO.Path.GetExtension(opFile.FileName);
+                    System.Drawing.Bitmap bitmap = null;
+                    switch (ext)
+                    {
+                        case "png":
+                        case "jpg":
+                            bitmap = new System.Drawing.Bitmap(opFile.FileName);
+                            break;
+                        case "pdf":
+                            break;
+                        default:
+                            break;
+                    }
+                    if (bitmap == null) return;
+                    omr.GetPositionPoint(bitmap, out List<OMR.PointProperty> point, out int size);
                     ChangeState(PageState.KeyAnswer);
                 }
             });
