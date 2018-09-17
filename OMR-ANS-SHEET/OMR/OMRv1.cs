@@ -31,25 +31,24 @@ namespace OMR
             List<PointProperty> pointProperty = new List<PointProperty>();
             List<int> rowSize = new List<int>();
             /////////////////////////////////////////////////////////////////////////////////////////////
-            var bitmap = new System.Drawing.Bitmap(@"D:\WORK\sheetStart.jpg");
             Image<Rgb, byte> img = new Image<Rgb, byte>(bitmap);
             Image<Gray, byte> imageGray = img.Convert<Gray, byte>();
-            imageGray.Bitmap.Save(@"D:\WORK\sheetStart2.jpg");
-            Console.WriteLine("convert to img-gray complete : D:\\WORK\\sheetStart2.jpg");
+            //imageGray.Bitmap.Save(@"D:\WORK\sheetStart2.jpg");
+            //Console.WriteLine("convert to img-gray complete : D:\\WORK\\sheetStart2.jpg");
             Console.ReadKey(true);
             UMat uimage = new UMat();
             CvInvoke.CvtColor(img, uimage, ColorConversion.Bgr2Gray);
-            img.Bitmap.Save(@"D:\WORK\sheetStart3.jpg");
-            Console.WriteLine("convert to Color complete : D:\\WORK\\sheetStart3.jpg");
+            //img.Bitmap.Save(@"D:\WORK\sheetStart3.jpg");
+            //Console.WriteLine("convert to Color complete : D:\\WORK\\sheetStart3.jpg");
             Console.ReadKey(true);
             UMat pyrDown = new UMat();
             CvInvoke.PyrDown(uimage, pyrDown);
             CvInvoke.PyrUp(pyrDown, uimage);
-            uimage.Bitmap.Save(@"D:\WORK\sheetStart4.jpg");
-            Console.WriteLine("clear noise complete : D:\\WORK\\sheetStart4.jpg");
+            //uimage.Bitmap.Save(@"D:\WORK\sheetStart4.jpg");
+            //Console.WriteLine("clear noise complete : D:\\WORK\\sheetStart4.jpg");
             Console.ReadKey(true);
             CircleF[] circles = CvInvoke.HoughCircles(uimage, HoughType.Gradient, 1, 20, 20, 15, 16, 18);
-            uimage.Bitmap.Save(@"D:\WORK\sheetStart5.jpg");
+            //uimage.Bitmap.Save(@"D:\WORK\sheetStart5.jpg");
             Console.ReadKey(true);
             Image<Rgb, Byte> circleImage = img.CopyBlank();
             double x;//row
@@ -91,7 +90,7 @@ namespace OMR
                     foreach (var item in MyRows)
                     {
                         //SortRow.Add(new MyPoint(item.point.X, item.point.Y, DistRow));
-                        pointProperty.Add(new PointProperty( new Point( (int)item.point.X , (int)item.point.Y), (int)DistRow, false));
+                        pointProperty.Add(new PointProperty(new Point((int)item.point.X, (int)item.point.Y), (int)DistRow, false));
                         count_len++;//
                         rowSize.Add(count_len);//
                         count_len = 0;//
@@ -110,7 +109,7 @@ namespace OMR
             }
             Console.ReadKey(true);
             circleImage.Bitmap.Save(@"D:\WORK\sheetStart6.jpg");
-            Console.WriteLine("write circle border complete : D:\\WORK\\sheetStart6.jpg");
+            //Console.WriteLine("write circle border complete : D:\\WORK\\sheetStart6.jpg");
             Console.ReadKey(true);
             /////////////////////////////////////////////////////////////////////////////////////////////
 
