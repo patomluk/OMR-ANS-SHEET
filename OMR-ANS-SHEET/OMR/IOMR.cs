@@ -6,7 +6,7 @@ namespace OMR
 {
     public struct PointProperty
     {
-        public PointProperty(Point position, bool isCheck , int rad) { Position = position; IsCheck = isCheck; Rad = rad; }
+        public PointProperty(Point position, int rad, bool isCheck) { Position = position; IsCheck = isCheck; Rad = rad; }
         public Point Position { get; set; }
         public bool IsCheck { get; set; }
         public int Rad { get; set; }
@@ -14,6 +14,6 @@ namespace OMR
 
     public interface IOMR
     {
-        (List<PointProperty> pointsList, List<int> rowSize) GetPositionPoint(bool getCheck = false);
+        (List<PointProperty> pointsList, List<int> rowSize) GetPositionPoint(Bitmap bitmap, bool getCheck = false);
     }
 }

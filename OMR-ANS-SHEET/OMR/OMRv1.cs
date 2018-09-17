@@ -26,7 +26,7 @@ namespace OMR
             public MyRow(MyPoint mp) { point = mp; }
         }
 
-        (List<PointProperty> pointsList, List<int> rowSize) IOMR.GetPositionPoint(bool getCheck)
+        (List<PointProperty> pointsList, List<int> rowSize) IOMR.GetPositionPoint(Bitmap bitmap, bool getCheck)
         {
             List<PointProperty> pointProperty = new List<PointProperty>();
             List<int> rowSize = new List<int>();
@@ -91,7 +91,7 @@ namespace OMR
                     foreach (var item in MyRows)
                     {
                         //SortRow.Add(new MyPoint(item.point.X, item.point.Y, DistRow));
-                        pointProperty.Add(new PointProperty( new Point( (int)item.point.X , (int)item.point.Y) , false , (int)DistRow));
+                        pointProperty.Add(new PointProperty( new Point( (int)item.point.X , (int)item.point.Y), (int)DistRow, false));
                         count_len++;//
                         rowSize.Add(count_len);//
                         count_len = 0;//

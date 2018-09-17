@@ -138,7 +138,7 @@ namespace AnswerSheetChecker
                             break;
                     }
                     if (bitmap == null) return;
-                    omr.GetPositionPoint(bitmap, out List<OMR.PointProperty> point, out int size);
+                    (List<OMR.PointProperty> point, List<int> rowSize) = omr.GetPositionPoint(bitmap, false);
                     ChangeState(PageState.KeyAnswer);
                 }
             });
