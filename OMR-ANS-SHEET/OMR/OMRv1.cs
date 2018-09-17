@@ -35,21 +35,21 @@ namespace OMR
             Image<Gray, byte> imageGray = img.Convert<Gray, byte>();
             //imageGray.Bitmap.Save(@"D:\WORK\sheetStart2.jpg");
             //Console.WriteLine("convert to img-gray complete : D:\\WORK\\sheetStart2.jpg");
-            Console.ReadKey(true);
+            //Console.ReadKey(true);
             UMat uimage = new UMat();
             CvInvoke.CvtColor(img, uimage, ColorConversion.Bgr2Gray);
             //img.Bitmap.Save(@"D:\WORK\sheetStart3.jpg");
             //Console.WriteLine("convert to Color complete : D:\\WORK\\sheetStart3.jpg");
-            Console.ReadKey(true);
+            //Console.ReadKey(true);
             UMat pyrDown = new UMat();
             CvInvoke.PyrDown(uimage, pyrDown);
             CvInvoke.PyrUp(pyrDown, uimage);
             //uimage.Bitmap.Save(@"D:\WORK\sheetStart4.jpg");
             //Console.WriteLine("clear noise complete : D:\\WORK\\sheetStart4.jpg");
-            Console.ReadKey(true);
+            //Console.ReadKey(true);
             CircleF[] circles = CvInvoke.HoughCircles(uimage, HoughType.Gradient, 1, 20, 20, 15, 16, 18);
             //uimage.Bitmap.Save(@"D:\WORK\sheetStart5.jpg");
-            Console.ReadKey(true);
+            //Console.ReadKey(true);
             Image<Rgb, Byte> circleImage = img.CopyBlank();
             double x;//row
             double y;//col
@@ -66,11 +66,11 @@ namespace OMR
             MyPoints = MyPoints.OrderBy(item => item.Y).ToList();
             foreach (var item in MyPoints)
             {
-                Console.WriteLine("x :" + item.X + ",y :" + item.Y + ",rad :" + item.Rad);
+                //Console.WriteLine("x :" + item.X + ",y :" + item.Y + ",rad :" + item.Rad);
             }
-            Console.WriteLine("==========================================================================================");
+            //Console.WriteLine("==========================================================================================");
 
-            Console.ReadKey(true);
+            //Console.ReadKey(true);
             var SortRow = new List<MyPoint>();
             var ThisRow = MyPoints[0].Y;
             var DistRow = MyPoints[0].Rad;
@@ -107,10 +107,10 @@ namespace OMR
             {
                 Console.WriteLine("x :" + item.X + ",y :" + item.Y + ",rad :" + item.Rad);
             }
-            Console.ReadKey(true);
+            //Console.ReadKey(true);
             circleImage.Bitmap.Save(@"D:\WORK\sheetStart6.jpg");
             //Console.WriteLine("write circle border complete : D:\\WORK\\sheetStart6.jpg");
-            Console.ReadKey(true);
+            //Console.ReadKey(true);
             /////////////////////////////////////////////////////////////////////////////////////////////
 
 
