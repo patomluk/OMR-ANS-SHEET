@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.Runtime.InteropServices;
+using Emgu.CV;
+using Emgu.CV.Structure;
+using Emgu.CV.CvEnum;
 
 namespace OMR
 {
@@ -27,7 +30,6 @@ namespace OMR
         {
             List<PointProperty> pointProperty = new List<PointProperty>();
             List<int> rowSize = new List<int>();
-
             /////////////////////////////////////////////////////////////////////////////////////////////
             var bitmap = new System.Drawing.Bitmap(@"D:\WORK\sheetStart.jpg");
             Image<Rgb, byte> img = new Image<Rgb, byte>(bitmap);
@@ -35,7 +37,6 @@ namespace OMR
             imageGray.Bitmap.Save(@"D:\WORK\sheetStart2.jpg");
             Console.WriteLine("convert to img-gray complete : D:\\WORK\\sheetStart2.jpg");
             Console.ReadKey(true);
-
             UMat uimage = new UMat();
             CvInvoke.CvtColor(img, uimage, ColorConversion.Bgr2Gray);
             img.Bitmap.Save(@"D:\WORK\sheetStart3.jpg");
@@ -58,11 +59,9 @@ namespace OMR
             for (int i = 0; i < circles.Length; i++)
             {
                 circleImage.Draw(circles[i], new Rgb(Color.Red), 2);
-
                 x = Math.Round(circles[i].Center.X);
                 y = Math.Round(circles[i].Center.Y);
                 r = Math.Round(circles[i].Radius, 0);
-
                 MyPoints.Add(new MyPoint(x, y, r));
             }
             MyPoints = MyPoints.OrderBy(item => item.Y).ToList();
@@ -77,6 +76,8 @@ namespace OMR
             var ThisRow = MyPoints[0].Y;
             var DistRow = MyPoints[0].Rad;
             var MyRows = new List<MyRow>();
+            var count_len = 0;//
+            var maximum_len = 0;//
             for (var i = 0; i < MyPoints.Count; i++)
             {
                 if (MyPoints[i].Y <= ThisRow + DistRow && MyPoints[i].Y >= ThisRow - DistRow)
@@ -90,6 +91,13 @@ namespace OMR
                     foreach (var item in MyRows)
                     {
                         SortRow.Add(new MyPoint(item.point.X, item.point.Y, DistRow));
+                        count_len++;//
+                        rowSize.Add(count_len);//
+                        count_len = 0;//
+                    }
+                    if (count_len >= maximum_len)
+                    {
+                        maximum_len = count_len;//
                     }
                     MyRows.Clear();
                 }
