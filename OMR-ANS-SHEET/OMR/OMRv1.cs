@@ -103,12 +103,12 @@ namespace OMR
                 }
             }
 
-            foreach (var item in SortRow)
-            {
-                Console.WriteLine("x :" + item.X + ",y :" + item.Y + ",rad :" + item.Rad);
-            }
+            //foreach (var item in SortRow)
+            //{
+            //    Console.WriteLine("x :" + item.X + ",y :" + item.Y + ",rad :" + item.Rad);
+            //}
             //Console.ReadKey(true);
-            circleImage.Bitmap.Save(@"D:\WORK\sheetStart6.jpg");
+            //circleImage.Bitmap.Save(@"D:\WORK\sheetStart6.jpg");
             //Console.WriteLine("write circle border complete : D:\\WORK\\sheetStart6.jpg");
             //Console.ReadKey(true);
             /////////////////////////////////////////////////////////////////////////////////////////////
