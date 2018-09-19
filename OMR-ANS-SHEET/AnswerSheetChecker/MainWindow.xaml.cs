@@ -133,6 +133,12 @@ namespace AnswerSheetChecker
                             bitmap = new System.Drawing.Bitmap(opFile.FileName);
                             break;
                         case ".pdf":
+                            var images = new List<System.Drawing.Image>();
+                            //var pdf = new org.pdfclown.files.File(opFile.FileName);
+                            //var renderer = new org.pdfclown.tools.Renderer();
+                            //for (int i = 0; i < pdf.Document.Pages.Count; i++) images.Add(renderer.Render(pdf.Document.Pages[i], pdf.Document.Pages[i].Size));
+                            var winSelect = new WindowSelectPage(images, (int page) => { if (page < 0) return; bitmap = new System.Drawing.Bitmap(images[page]); });
+                            winSelect.ShowDialog();
                             break;
                         default:
                             break;
