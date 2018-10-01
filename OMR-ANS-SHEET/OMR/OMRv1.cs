@@ -93,13 +93,14 @@ namespace OMR
                         //SortRow.Add(new MyPoint(item.point.X, item.point.Y, DistRow));
                         pointProperty.Add(new PointProperty(new Point((int)item.point.X, (int)item.point.Y), (int)DistRow, false));
                         //
-                        rowSize.Add(count_len);//
+                        
                         count_len = 0;//
                     }
                     if (count_len >= maximum_len)
                     {
                         maximum_len = count_len;//
                     }
+                    rowSize.Add(count_len);//
                     MyRows.Clear();
                 }
             }
