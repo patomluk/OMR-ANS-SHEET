@@ -82,7 +82,7 @@ namespace OMR
                 if (MyPoints[i].Y <= ThisRow + DistRow && MyPoints[i].Y >= ThisRow - DistRow)
                 {
                     MyRows.Add(new MyRow(MyPoints[i]));
-                    count_len++;
+                    
                 }
                 else
                 {
@@ -92,13 +92,14 @@ namespace OMR
                     {
                         pointProperty.Add(new PointProperty(new Point((int)item.point.X, (int)item.point.Y), (int)DistRow, false));
                         //                  
-                        count_len = 0;//
+                        count_len++;
                     }
                     if (count_len >= maximum_len)
                     {
                         maximum_len = count_len;//
                     }
                     rowSize.Add(count_len);//
+                    count_len = 0;//
                     MyRows.Clear();
                 }
             }
