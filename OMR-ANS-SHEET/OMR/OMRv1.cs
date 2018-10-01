@@ -55,7 +55,7 @@ namespace OMR
             double y;//col
             double r;//rad
             var MyPoints = new List<MyPoint>();
-            for (int i = 0; i < circles.Length; i++)
+            for (int i = 0; i <  circles.Length; i++)
             {
                 circleImage.Draw(circles[i], new Rgb(Color.Red), 2);
                 x = Math.Round(circles[i].Center.X);
@@ -77,7 +77,7 @@ namespace OMR
             var MyRows = new List<MyRow>();
             var count_len = 0;//
             var maximum_len = 0;//
-            for (var i = 0; i < MyPoints.Count; i++)
+            for (var i = 0; i <= MyPoints.Count; i++)
             {
                 if (MyPoints[i].Y <= ThisRow + DistRow && MyPoints[i].Y >= ThisRow - DistRow)
                 {
@@ -90,8 +90,7 @@ namespace OMR
                     MyRows = MyRows.OrderBy(item => item.point.X).ToList();
                     foreach (var item in MyRows)
                     {
-                        pointProperty.Add(new PointProperty(new Point((int)item.point.X, (int)item.point.Y), (int)DistRow, false));
-                        //                  
+                        pointProperty.Add(new PointProperty(new Point((int)item.point.X, (int)item.point.Y), (int)DistRow, false));           
                         count_len++;
                     }
                     if (count_len >= maximum_len)
