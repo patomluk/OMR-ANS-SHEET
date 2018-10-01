@@ -90,10 +90,8 @@ namespace OMR
                     MyRows = MyRows.OrderBy(item => item.point.X).ToList();
                     foreach (var item in MyRows)
                     {
-                        //SortRow.Add(new MyPoint(item.point.X, item.point.Y, DistRow));
                         pointProperty.Add(new PointProperty(new Point((int)item.point.X, (int)item.point.Y), (int)DistRow, false));
-                        //
-                        
+                        //                  
                         count_len = 0;//
                     }
                     if (count_len >= maximum_len)
