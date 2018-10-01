@@ -1,0 +1,22 @@
+﻿<Page x:Class="AnswerSheetChecker.Content.PageSelectTemplate"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AnswerSheetChecker.Content"
+      mc:Ignorable="d" 
+      d:DesignHeight="690" d:DesignWidth="1080"
+      Title="SelectTemplate">
+
+    <Grid>
+        <Button x:Name="ButtonBack" Content="ย้อนกลับ" Margin="10,0,0,0" Height="32" VerticalAlignment="Bottom" Click="ButtonBack_Click" HorizontalAlignment="Left" Width="75"/>
+        <TextBlock Margin="40,10,40,37" TextWrapping="Wrap" FontSize="20">
+            สร้างต้นแบบ<LineBreak/>
+            การสร้างต้นแบบ คือ สร้างรูปแบบกระดาษคำตอบเพื่อให้ใช้กับโปรแกรม<LineBreak/><LineBreak/>
+            เรียกข้อมูล<LineBreak/>
+            การเรียกข้อมูล คือ การเรียกรูปแบบกระดาษคำตอบที่ผู้ใช้เคยสร้างไว้แล้ว (.ast)
+        </TextBlock>
+        <Button x:Name="ButtonLoad" Content="เรียกข้อมูล" Margin="412,309,412,0" Height="94" VerticalAlignment="Top" Click="ButtonLoad_Click"/>
+        <Button x:Name="ButtonCreate" Content="สร้างต้นแบบ" Margin="412,210,412,0" Height="94" VerticalAlignment="Top" Click="ButtonCreate_Click"/>
+    </Grid>
+</Page>
