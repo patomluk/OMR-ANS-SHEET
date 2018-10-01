@@ -1,0 +1,20 @@
+﻿<Page x:Class="AnswerSheetChecker.Content.PageCreateTemplate"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AnswerSheetChecker.Content"
+      mc:Ignorable="d" 
+      d:DesignHeight="690" d:DesignWidth="1080"
+      Title="PageCreateTemplate">
+
+    <Grid>
+        <Button x:Name="ButtonBack" Content="ย้อนกลับ" Margin="10,0,0,0" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="75"/>
+        <Image x:Name="ImagePreview" Margin="10,10,554,37" MouseLeftButtonDown="ImagePreview_MouseLeftButtonDown"/>
+        <Border BorderBrush="Black" BorderThickness="1" Margin="10,10,530,37"/>
+        <Button x:Name="ButtonAddInfo" Content="เพิ่มชุดข้อมูล" Margin="555,10,0,0" VerticalAlignment="Top" Height="28" HorizontalAlignment="Left" Width="90" Click="ButtonAddInfo_Click"/>
+        <Button x:Name="ButtonAddAns" Content="เพิ่มชุดคำตอบ" Margin="555,260,0,0" VerticalAlignment="Top" Height="28" HorizontalAlignment="Left" Width="90" Click="ButtonAddAns_Click"/>
+        <DataGrid Margin="555,43,10,0" Height="200" VerticalAlignment="Top"/>
+        <DataGrid Margin="555,293,10,37"/>
+    </Grid>
+</Page>

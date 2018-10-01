@@ -66,9 +66,36 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddDataGroup.xaml.cs">
+      <DependentUpon>AddDataGroup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\PageCreateTemplate.xaml.cs">
+      <DependentUpon>PageCreateTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\PageHome.xaml.cs">
+      <DependentUpon>PageHome.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\PageSelectTemplate.xaml.cs">
+      <DependentUpon>PageSelectTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WindowMain.xaml.cs">
+      <DependentUpon>WindowMain.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WindowSelectPage.xaml.cs">
       <DependentUpon>WindowSelectPage.xaml</DependentUpon>
     </Compile>
+    <Page Include="AddDataGroup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\PageCreateTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\PageSelectTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -81,6 +108,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Content\PageHome.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowMain.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="WindowSelectPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -122,6 +157,7 @@
   <ItemGroup>
     <Resource Include="License-LGPL.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\EMGU.CV.3.4.1.2976\build\EMGU.CV.targets" Condition="Exists('..\packages\EMGU.CV.3.4.1.2976\build\EMGU.CV.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

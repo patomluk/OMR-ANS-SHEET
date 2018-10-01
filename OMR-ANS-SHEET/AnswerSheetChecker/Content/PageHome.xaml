@@ -1,0 +1,16 @@
+﻿<Page x:Class="AnswerSheetChecker.Content.PageHome"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AnswerSheetChecker.Content"
+      mc:Ignorable="d" 
+      d:DesignHeight="690" d:DesignWidth="1080"
+      Title="PageHome">
+
+    <Grid>
+        <Button x:Name="ButtonNext" Content="ต่อไป" Margin="0,0,10,0" HorizontalAlignment="Right" Width="75" Height="32" VerticalAlignment="Bottom" Click="ButtonNext_Click"/>
+        <TextBlock Margin="10,10,10,37" TextWrapping="Wrap" Text="  โปรแกรมตรวจกระดาษคำตอบแบบหลายตัวเลือกด้วยวิธีการประมวลผลภาพ" FontSize="20"/>
+
+    </Grid>
+</Page>
