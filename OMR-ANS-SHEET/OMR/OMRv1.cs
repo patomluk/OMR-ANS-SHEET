@@ -58,10 +58,10 @@ namespace OMR
             for (int i = 0; i < circles.Length; i++)
             {
                 circleImage.Draw(circles[i], new Rgb(Color.Red), 2);
-                x = Math.Round(circles[i].Center.X);
-                y = Math.Round(circles[i].Center.Y);
+                x = Math.Round(circles[i].Center.X, 0);
+                y = Math.Round(circles[i].Center.Y, 0);
                 r = Math.Round(circles[i].Radius, 0);
-                MyPoints.Add(new MyPoint(x, y, r));
+                MyPoints.Add(new MyPoint(x, y, r)); 
             }
             MyPoints = MyPoints.OrderBy(item => item.Y).ToList();
             var SortRow = new List<MyPoint>();
@@ -83,12 +83,13 @@ namespace OMR
                     {
                         pointProperty.Add(new PointProperty(new Point((int)item.point.X, (int)item.point.Y), (int)Dist, false));
                     }
+                    rowSize.Add(MyRows.Count);
                     MyRows.Clear();
                     y_min = MyPoints[i].Y - Dist / 2;
                     y_max = MyPoints[i].Y + Dist / 2;
                     this_row++;
                     MyRows.Add(new MyRow(MyPoints[i]));
-                    rowSize.Add(MyRows.Count);
+                    
                 }
             }
             foreach (var item in MyRows)
