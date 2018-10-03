@@ -64,13 +64,6 @@ namespace OMR
                 MyPoints.Add(new MyPoint(x, y, r));
             }
             MyPoints = MyPoints.OrderBy(item => item.Y).ToList();
-            foreach (var item in MyPoints)
-            {
-                //Console.WriteLine("x :" + item.X + ",y :" + item.Y + ",rad :" + item.Rad);
-            }
-            //Console.WriteLine("==========================================================================================");
-
-            //Console.ReadKey(true);
             var SortRow = new List<MyPoint>();
             var Dist = MyPoints[0].Rad;
             var y_min = MyPoints[0].Y - Dist / 2;
@@ -88,9 +81,8 @@ namespace OMR
                     MyRows = MyRows.OrderBy(item => item.point.X).ToList();
                     foreach (var item in MyRows)
                     {
-                        SortRow.Add(new MyPoint(item.point.X, item.point.Y, Dist));
+                        pointProperty.Add(new PointProperty(new Point((int)item.point.X, (int)item.point.Y), (int)Dist, false));
                     }
-                    //Console.WriteLine("row :" + this_row + " , have point ? = " + MyRows.Count + " , sum =" + SortRow.Count);
                     MyRows.Clear();
                     y_min = MyPoints[i].Y - Dist / 2;
                     y_max = MyPoints[i].Y + Dist / 2;
@@ -101,7 +93,7 @@ namespace OMR
             }
             foreach (var item in MyRows)
             {
-                SortRow.Add(new MyPoint(item.point.X, item.point.Y, Dist));
+                pointProperty.Add(new PointProperty(new Point((int)item.point.X, (int)item.point.Y), (int)Dist, false));
             }
             rowSize.Add(MyRows.Count);
             return (pointProperty, rowSize);
