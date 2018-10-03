@@ -90,7 +90,7 @@ namespace OMR
                     {
                         SortRow.Add(new MyPoint(item.point.X, item.point.Y, Dist));
                     }
-                    Console.WriteLine("row :" + this_row + " , have point ? = " + MyRows.Count + " , sum =" + SortRow.Count);
+                    //Console.WriteLine("row :" + this_row + " , have point ? = " + MyRows.Count + " , sum =" + SortRow.Count);
                     MyRows.Clear();
                     y_min = MyPoints[i].Y - Dist / 2;
                     y_max = MyPoints[i].Y + Dist / 2;
