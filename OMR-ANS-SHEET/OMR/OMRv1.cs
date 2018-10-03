@@ -96,13 +96,14 @@ namespace OMR
                     y_max = MyPoints[i].Y + Dist / 2;
                     this_row++;
                     MyRows.Add(new MyRow(MyPoints[i]));
-
+                    rowSize.Add(MyRows.Count);
                 }
             }
             foreach (var item in MyRows)
             {
                 SortRow.Add(new MyPoint(item.point.X, item.point.Y, Dist));
             }
+            rowSize.Add(MyRows.Count);
             return (pointProperty, rowSize);
         }
     }
