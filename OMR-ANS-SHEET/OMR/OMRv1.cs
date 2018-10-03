@@ -72,42 +72,37 @@ namespace OMR
 
             //Console.ReadKey(true);
             var SortRow = new List<MyPoint>();
-            var ThisRow = MyPoints[0].Y;
-            var DistRow = MyPoints[0].Rad;
+            var Dist = MyPoints[0].Rad;
+            var y_min = MyPoints[0].Y - Dist / 2;
+            var y_max = MyPoints[0].Y + Dist / 2;
+            var this_row = 1;
             var MyRows = new List<MyRow>();
-            var count_len = 0;//
             for (var i = 0; i < MyPoints.Count; i++)
             {
-                if (MyPoints[i].Y <= ThisRow + DistRow && MyPoints[i].Y >= ThisRow - DistRow)
+                if (MyPoints[i].Y <= y_max && MyPoints[i].Y >= y_min)
                 {
                     MyRows.Add(new MyRow(MyPoints[i]));
-                    
                 }
                 else
                 {
-                    ThisRow = MyPoints[i].Y;
                     MyRows = MyRows.OrderBy(item => item.point.X).ToList();
                     foreach (var item in MyRows)
                     {
-                        pointProperty.Add(new PointProperty(new Point((int)item.point.X, (int)item.point.Y), (int)DistRow, false));           
-                        count_len++;
+                        SortRow.Add(new MyPoint(item.point.X, item.point.Y, Dist));
                     }
-                    rowSize.Add(pointProperty.Count);//
+                    Console.WriteLine("row :" + this_row + " , have point ? = " + MyRows.Count + " , sum =" + SortRow.Count);
                     MyRows.Clear();
+                    y_min = MyPoints[i].Y - Dist / 2;
+                    y_max = MyPoints[i].Y + Dist / 2;
+                    this_row++;
+                    MyRows.Add(new MyRow(MyPoints[i]));
+
                 }
             }
-
-            //foreach (var item in SortRow)
-            //{
-            //    Console.WriteLine("x :" + item.X + ",y :" + item.Y + ",rad :" + item.Rad);
-            //}
-            //Console.ReadKey(true);
-            //circleImage.Bitmap.Save(@"D:\WORK\sheetStart6.jpg");
-            //Console.WriteLine("write circle border complete : D:\\WORK\\sheetStart6.jpg");
-            //Console.ReadKey(true);
-            /////////////////////////////////////////////////////////////////////////////////////////////
-
-
+            foreach (var item in MyRows)
+            {
+                SortRow.Add(new MyPoint(item.point.X, item.point.Y, Dist));
+            }
             return (pointProperty, rowSize);
         }
     }
