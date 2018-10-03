@@ -97,6 +97,10 @@ namespace OMR
                 pointProperty.Add(new PointProperty(new Point((int)item.point.X, (int)item.point.Y), (int)Dist, false));
             }
             rowSize.Add(MyRows.Count);
+            if (getCheck) // check ans
+            { 
+
+            }
             return (pointProperty, rowSize);
         }
     }
