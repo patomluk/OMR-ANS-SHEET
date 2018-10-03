@@ -62,22 +62,26 @@ namespace AnswerSheetChecker
 
         private void TextBoxNumberChoice_TextChanged(object sender, TextChangedEventArgs e)
         {
-            ButtonOK.IsEnabled = false;
+            if (ButtonOK != null) ButtonOK.IsEnabled = false;
         }
 
         private void TextBoxNumberAns_TextChanged(object sender, TextChangedEventArgs e)
         {
-            ButtonOK.IsEnabled = false;
+            if (ButtonOK != null) ButtonOK.IsEnabled = false;
         }
 
         private void TextBoxCol_TextChanged(object sender, TextChangedEventArgs e)
         {
-            ButtonOK.IsEnabled = false;
+            if (ButtonOK != null) ButtonOK.IsEnabled = false;
         }
 
         private void TextBoxRow_TextChanged(object sender, TextChangedEventArgs e)
         {
-            ButtonOK.IsEnabled = false;
+            if (ButtonOK != null) ButtonOK.IsEnabled = false;
+        }
+        private void TextBoxName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (ButtonOK != null) ButtonOK.IsEnabled = false;
         }
 
         private void TextBoxNumberChoice_LostFocus(object sender, RoutedEventArgs e)
@@ -143,11 +147,6 @@ namespace AnswerSheetChecker
         {
             callback(new AnswerSheetChecker.Template.TemplateData(TextBoxName.Text, (bool)RadioButtonVertical.IsChecked ? AnswerSheetChecker.Template.TemplateData.Type.Vertical : AnswerSheetChecker.Template.TemplateData.Type.Horizontal, int.Parse(TextBoxNumberChoice.Text), int.Parse(TextBoxNumberAns.Text), int.Parse(TextBoxCol.Text), int.Parse(TextBoxRow.Text)));
             Close();
-        }
-
-        private void TextBoxName_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            ButtonOK.IsEnabled = false;
         }
     }
 }

@@ -41,16 +41,17 @@ namespace AnswerSheetChecker
             }
         }
 
-        public List<Template> InfoData { get; }
-        public List<Template> AnsData { get; }
+        public List<TemplateData> InfoData { get; }
+        public List<TemplateData> AnsData { get; }
         public List<OMR.PointProperty> PointsList { get; }
         public List<int> RowSize { get; }
         public List<int> RowOffset { get; }
         public System.Drawing.Bitmap Image { get; }
         public Template(System.Drawing.Bitmap image, List<OMR.PointProperty> points, List<int> row)
         {
-            InfoData = new List<Template>();
-            AnsData = new List<Template>();
+            InfoData = new List<TemplateData>();
+            AnsData = new List<TemplateData>();
+            RowOffset = new List<int>();
             Image = image;
             PointsList = points;
             RowSize = row;

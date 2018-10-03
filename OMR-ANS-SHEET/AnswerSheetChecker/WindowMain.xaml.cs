@@ -19,6 +19,8 @@ namespace AnswerSheetChecker
     /// </summary>
     public partial class WindowMain : Window
     {
+        AnswerSheetChecker.Template template;
+
         public WindowMain()
         {
             InitializeComponent();
@@ -73,7 +75,14 @@ namespace AnswerSheetChecker
 
         public void ShowPageCreateTemplate(System.Drawing.Bitmap bitmap)
         {
-            FrameContent.Content = new Content.PageCreateTemplate(TextBlockNamePage, bitmap);
+            template = null;
+            FrameContent.Content = new Content.PageCreateTemplate(TextBlockNamePage, bitmap, 
+                () =>{
+                    ShowPageSelectTemplate();
+                },
+                (AnswerSheetChecker.Template template) => {
+                    this.template = template;
+                });
         }
     }
 }
