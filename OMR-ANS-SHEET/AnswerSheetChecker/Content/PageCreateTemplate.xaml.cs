@@ -26,6 +26,7 @@ namespace AnswerSheetChecker.Content
         private Template template;
         public PageCreateTemplate(TextBlock textBlockTitle, System.Drawing.Bitmap bitmap, Action back, Action<Template> next)
         {
+            textBlockTitle.Text = "สร้างรูปแบบกระดาษคำตอบ";
             this.back = back;
             this.next = next;
             omr = new OMR.OMRv1();

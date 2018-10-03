@@ -82,7 +82,13 @@ namespace AnswerSheetChecker
                 },
                 (AnswerSheetChecker.Template template) => {
                     this.template = template;
+                    ShowPageSelectKey();
                 });
+        }
+
+        public void ShowPageSelectKey()
+        {
+            FrameContent.Content = new Content.PageSelectKey(TextBlockNamePage);
         }
     }
 }

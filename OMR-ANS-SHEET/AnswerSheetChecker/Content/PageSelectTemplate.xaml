@@ -16,7 +16,7 @@
             เรียกข้อมูล<LineBreak/>
             การเรียกข้อมูล คือ การเรียกรูปแบบกระดาษคำตอบที่ผู้ใช้เคยสร้างไว้แล้ว (.ast)
         </TextBlock>
-        <Button x:Name="ButtonLoad" Content="เรียกข้อมูล" Margin="412,309,412,0" Height="94" VerticalAlignment="Top" Click="ButtonLoad_Click"/>
-        <Button x:Name="ButtonCreate" Content="สร้างต้นแบบ" Margin="412,210,412,0" Height="94" VerticalAlignment="Top" Click="ButtonCreate_Click"/>
+        <Button x:Name="ButtonLoad" Content="เรียกข้อมูล" Margin="412,210,412,0" Height="94" VerticalAlignment="Top" Click="ButtonLoad_Click"/>
+        <Button x:Name="ButtonCreate" Content="สร้างต้นแบบ" Margin="412,309,412,0" Height="94" VerticalAlignment="Top" Click="ButtonCreate_Click"/>
     </Grid>
 </Page>
