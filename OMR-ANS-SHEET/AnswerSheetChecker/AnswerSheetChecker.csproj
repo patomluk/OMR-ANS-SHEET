@@ -78,6 +78,7 @@
     <Compile Include="Content\PageSelectTemplate.xaml.cs">
       <DependentUpon>PageSelectTemplate.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Template.cs" />
     <Compile Include="WindowMain.xaml.cs">
       <DependentUpon>WindowMain.xaml</DependentUpon>
     </Compile>

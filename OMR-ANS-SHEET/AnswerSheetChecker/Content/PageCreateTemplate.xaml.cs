@@ -21,12 +21,14 @@ namespace AnswerSheetChecker.Content
     public partial class PageCreateTemplate : Page
     {
         private OMR.IOMR omr;
+        private Template template;
         public PageCreateTemplate(TextBlock textBlockTitle, System.Drawing.Bitmap bitmap)
         {
             omr = new OMR.OMRv1();
             textBlockTitle.Text = "";
             InitializeComponent();
             (var list, var size) = omr.GetPositionPoint(bitmap);
+            template = new Template(bitmap, list, size);
             ImagePreview.Source = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(
                 bitmap.GetHbitmap(),
                 IntPtr.Zero,
@@ -42,12 +44,20 @@ namespace AnswerSheetChecker.Content
 
         private void ButtonAddInfo_Click(object sender, RoutedEventArgs e)
         {
+            var win = new AddDataGroup(AddDataGroup.Type.Info, template, (AnswerSheetChecker.Template.TemplateData data) =>
+            {
 
+            });
+            win.ShowDialog();
         }
 
         private void ButtonAddAns_Click(object sender, RoutedEventArgs e)
         {
+            var win = new AddDataGroup(AddDataGroup.Type.Ans, template, (AnswerSheetChecker.Template.TemplateData data) =>
+            {
 
+            });
+            win.ShowDialog();
         }
     }
 }

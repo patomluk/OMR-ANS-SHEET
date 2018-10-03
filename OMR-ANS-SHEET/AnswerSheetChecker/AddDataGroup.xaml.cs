@@ -20,9 +20,38 @@ namespace AnswerSheetChecker
     /// </summary>
     public partial class AddDataGroup : Window
     {
-        public AddDataGroup()
+        public enum Type
         {
+            Info,
+            Ans,
+        }
+        private Type type;
+        private Template template;
+        private Action<Template.TemplateData> callback;
+
+        public AddDataGroup(Type type, Template template, Action<Template.TemplateData> f)
+        {
+            this.type = type;
+            this.template = template;
+            callback = f;
             InitializeComponent();
+            if (type == Type.Info)
+            {
+                TextBlockNumberChoice.Text = "";
+                TextBoxNumberChoice.IsEnabled = false;
+                TextBoxNumberChoice.Text = "10";
+            }
+            else
+            {
+                TextBlockName.Text = "";
+                TextBoxName.IsEnabled = false;
+                TextBlockNumberAns.Text = "จำนวนข้อ";
+            }
+            ImagePreview.Source = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(
+                template.Image.GetHbitmap(),
+                IntPtr.Zero,
+                System.Windows.Int32Rect.Empty,
+                BitmapSizeOptions.FromWidthAndHeight(template.Image.Width, template.Image.Height));
         }
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
@@ -33,22 +62,22 @@ namespace AnswerSheetChecker
 
         private void TextBoxNumberChoice_TextChanged(object sender, TextChangedEventArgs e)
         {
-            //if (int.Parse(((TextBox)sender).Text) < 1) e.Handled = false;
+            ButtonOK.IsEnabled = false;
         }
 
         private void TextBoxNumberAns_TextChanged(object sender, TextChangedEventArgs e)
         {
-            //if (int.Parse(((TextBox)sender).Text) < 1) e.Handled = false;
+            ButtonOK.IsEnabled = false;
         }
 
         private void TextBoxCol_TextChanged(object sender, TextChangedEventArgs e)
         {
-            //if (int.Parse(((TextBox)sender).Text) < 0) e.Handled = false;
+            ButtonOK.IsEnabled = false;
         }
 
         private void TextBoxRow_TextChanged(object sender, TextChangedEventArgs e)
         {
-            //if (int.Parse(((TextBox)sender).Text) < 0) e.Handled = false;
+            ButtonOK.IsEnabled = false;
         }
 
         private void TextBoxNumberChoice_LostFocus(object sender, RoutedEventArgs e)
@@ -89,6 +118,36 @@ namespace AnswerSheetChecker
                 return;
             }
             ((TextBox)sender).Text = "0";
+        }
+
+        private void ButtonCheck_Click(object sender, RoutedEventArgs e)
+        {
+            ButtonOK.IsEnabled = false;
+            if (type == Type.Info)
+            {
+                if (TextBoxName.Text.Length == 0) return;
+            }
+            int w = (bool)RadioButtonVertical.IsChecked ? int.Parse(TextBoxNumberChoice.Text) : int.Parse(TextBoxNumberAns.Text);
+            int h = (bool)RadioButtonVertical.IsChecked ? int.Parse(TextBoxNumberAns.Text) : int.Parse(TextBoxNumberChoice.Text);
+            int x = int.Parse(TextBoxCol.Text);
+            int y = int.Parse(TextBoxRow.Text);
+            if (y + h > template.RowSize.Count) return;
+            for (int i = y; i < y + h; i++)
+            {
+                if (x + w > template.RowSize[i]) return;
+            }
+            ButtonOK.IsEnabled = true;
+        }
+
+        private void ButtonOK_Click(object sender, RoutedEventArgs e)
+        {
+            callback(new AnswerSheetChecker.Template.TemplateData(TextBoxName.Text, (bool)RadioButtonVertical.IsChecked ? AnswerSheetChecker.Template.TemplateData.Type.Vertical : AnswerSheetChecker.Template.TemplateData.Type.Horizontal, int.Parse(TextBoxNumberChoice.Text), int.Parse(TextBoxNumberAns.Text), int.Parse(TextBoxCol.Text), int.Parse(TextBoxRow.Text)));
+            Close();
+        }
+
+        private void TextBoxName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ButtonOK.IsEnabled = false;
         }
     }
 }
