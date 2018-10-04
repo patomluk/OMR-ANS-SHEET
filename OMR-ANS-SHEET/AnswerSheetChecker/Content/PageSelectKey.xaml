@@ -15,8 +15,8 @@
             สร้างเฉลยด้วยตนเอง คือ <LineBreak/><LineBreak/>
             เรียกข้อมูล คือ การเฉลยที่ผู้ใช้เคยสร้างไว้แล้ว (.ask)
         </TextBlock>
-        <Button x:Name="ButtonLoad" Content="เรียกข้อมูล" Margin="412,210,412,0" Height="94" VerticalAlignment="Top"/>
-        <Button x:Name="ButtonCreate" Content="สร้างเฉลยด้วยกระดาษคำตอบ" Margin="412,309,412,0" Height="94" VerticalAlignment="Top"/>
-        <Button x:Name="ButtonMake" Content="สร้างเฉลยด้วยตนเอง" Margin="412,408,412,0" Height="94" VerticalAlignment="Top"/>
+        <Button x:Name="ButtonLoad" Content="เรียกข้อมูล" Margin="412,210,412,0" Height="94" VerticalAlignment="Top" Click="ButtonLoad_Click"/>
+        <Button x:Name="ButtonCreate" Content="สร้างเฉลยด้วยกระดาษคำตอบ" Margin="412,309,412,0" Height="94" VerticalAlignment="Top" Click="ButtonCreate_Click"/>
+        <Button x:Name="ButtonMake" Content="สร้างเฉลยด้วยตนเอง" Margin="412,408,412,0" Height="94" VerticalAlignment="Top" Click="ButtonMake_Click"/>
     </Grid>
 </Page>

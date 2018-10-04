@@ -25,5 +25,25 @@ namespace AnswerSheetChecker.Content
             textBlockTitle.Text = "ตั้งค่าเฉลย";
             InitializeComponent();
         }
+
+        private void ButtonLoad_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ButtonCreate_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ButtonMake_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ButtonBack_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
