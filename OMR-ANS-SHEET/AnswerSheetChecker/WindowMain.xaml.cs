@@ -88,7 +88,13 @@ namespace AnswerSheetChecker
 
         public void ShowPageSelectKey()
         {
-            FrameContent.Content = new Content.PageSelectKey(TextBlockNamePage);
+            FrameContent.Content = new Content.PageSelectKey(TextBlockNamePage, template,
+                () => {
+                    ShowPageSelectTemplate();
+                },
+                (Key key)=>{
+
+                });
         }
     }
 }
