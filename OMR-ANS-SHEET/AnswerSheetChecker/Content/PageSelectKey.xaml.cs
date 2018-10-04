@@ -33,7 +33,37 @@ namespace AnswerSheetChecker.Content
 
         private void ButtonCreate_Click(object sender, RoutedEventArgs e)
         {
-
+            OMR.IOMR omr = new OMR.OMRv1();
+            var opFile = new Microsoft.Win32.OpenFileDialog()
+            {
+                Title = "เรียกกระดาษคำตอบ(เฉลย)",
+                Filter = "Image (*.jpg *.png)|*.jpg;*.png|Adobe Portable Document Format(*.pdf)|*.pdf",
+            };
+            if (opFile.ShowDialog() == true) /* ข้อมูลตารางจากรูป*/
+            {
+                string ext = System.IO.Path.GetExtension(opFile.FileName);
+                System.Drawing.Bitmap bitmap = null;
+                switch (ext)
+                {
+                    case ".png":
+                    case ".jpg":
+                        bitmap = new System.Drawing.Bitmap(opFile.FileName);
+                        break;
+                    case ".pdf":
+                        var images = new List<System.Drawing.Image>();
+                        //var pdf = new org.pdfclown.files.File(opFile.FileName);
+                        //var renderer = new org.pdfclown.tools.Renderer();
+                        //for (int i = 0; i < pdf.Document.Pages.Count; i++) images.Add(renderer.Render(pdf.Document.Pages[i], pdf.Document.Pages[i].Size));
+                        var winSelect = new WindowSelectPage(images, (int page) => { if (page < 0) return; bitmap = new System.Drawing.Bitmap(images[page]); });
+                        winSelect.ShowDialog();
+                        break;
+                    default:
+                        break;
+                }
+                if (bitmap == null) return;
+                (List<OMR.PointProperty> point, List<int> rowSize) = omr.GetPositionPoint(bitmap, true);
+                //ChangeState(PageState.KeyAnswer);
+            }
         }
 
         private void ButtonMake_Click(object sender, RoutedEventArgs e)
