@@ -9,18 +9,18 @@
     <Grid>
         <Image x:Name="ImagePreview" Margin="10,10,152,10"/>
         <Border BorderBrush="Black" BorderThickness="1" Margin="10,10,152,10"/>
-        <RadioButton x:Name="RadioButtonVertical" Content="เรียงแนวตั้ง" HorizontalAlignment="Left" Margin="555,59,0,0" VerticalAlignment="Top" IsChecked="True"/>
-        <RadioButton Content="เรียงแนวนอน" HorizontalAlignment="Left" Margin="555,79,0,0" VerticalAlignment="Top"/>
-        <TextBlock x:Name="TextBlockNumberChoice" HorizontalAlignment="Left" Margin="555,99,0,0" TextWrapping="Wrap" Text="จำนวนตัวเลือก" VerticalAlignment="Top"/>
+        <RadioButton x:Name="RadioButtonVertical" Content="อ่านตามแนวตั้ง" HorizontalAlignment="Left" Margin="555,59,0,0" VerticalAlignment="Top" IsChecked="True"/>
+        <RadioButton Content="อ่านตามแนวนอน" HorizontalAlignment="Left" Margin="555,79,0,0" VerticalAlignment="Top"/>
+        <TextBlock x:Name="TextBlockNumberChoice" HorizontalAlignment="Left" Margin="555,99,0,0" TextWrapping="Wrap" Text="ตัวเลือก" VerticalAlignment="Top"/>
         <TextBox x:Name="TextBoxNumberChoice" HorizontalAlignment="Left" Height="23" Margin="555,120,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="120" PreviewTextInput="NumberValidationTextBox" TextChanged="TextBoxNumberChoice_TextChanged" LostFocus="TextBoxNumberChoice_LostFocus"/>
         <TextBlock x:Name="TextBlockNumberAns" HorizontalAlignment="Left" Margin="555,148,0,0" TextWrapping="Wrap" Text="จำนวนหลัก" VerticalAlignment="Top"/>
         <TextBox x:Name="TextBoxNumberAns" HorizontalAlignment="Left" Height="23" Margin="555,169,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="120" PreviewTextInput="NumberValidationTextBox" TextChanged="TextBoxNumberAns_TextChanged" LostFocus="TextBoxNumberAns_LostFocus"/>
         <TextBlock HorizontalAlignment="Left" Margin="555,197,0,0" TextWrapping="Wrap" Text="ตำแหน่งเริ่มต้น" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="555,218,0,0" TextWrapping="Wrap" Text="แนวที่" VerticalAlignment="Top" Height="22"/>
+        <TextBlock HorizontalAlignment="Left" Margin="555,218,0,0" TextWrapping="Wrap" Text="หลักที่" VerticalAlignment="Top" Height="22"/>
         <TextBox x:Name="TextBoxCol" HorizontalAlignment="Left" Height="23" Margin="585,217,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="89" PreviewTextInput="NumberValidationTextBox" TextChanged="TextBoxCol_TextChanged" LostFocus="TextBoxCol_LostFocus"/>
         <TextBlock HorizontalAlignment="Left" Margin="555,245,0,0" TextWrapping="Wrap" Text="แถวที่" VerticalAlignment="Top" Height="22"/>
         <TextBox x:Name="TextBoxRow" HorizontalAlignment="Left" Height="23" Margin="586,245,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="89" PreviewTextInput="NumberValidationTextBox" TextChanged="TextBoxRow_TextChanged" LostFocus="TextBoxRow_LostFocus"/>
-        <Button x:Name="ButtonCheck" Content="ตรวจสอบ" HorizontalAlignment="Left" Margin="556,273,0,0" VerticalAlignment="Top" Width="119" Click="ButtonCheck_Click"/>
+        <Button x:Name="ButtonCheck" Content="แสดงผลขอบเขตที่เลือก" HorizontalAlignment="Left" Margin="556,273,0,0" VerticalAlignment="Top" Width="119" Click="ButtonCheck_Click"/>
         <Button x:Name="ButtonOK" Content="เสร็จสิ้น" HorizontalAlignment="Left" Margin="556,298,0,0" VerticalAlignment="Top" Width="119" IsEnabled="False" Click="ButtonOK_Click"/>
         <TextBox x:Name="TextBoxName" HorizontalAlignment="Left" Height="23" Margin="555,31,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="TextBoxName_TextChanged"/>
         <TextBlock x:Name="TextBlockName" HorizontalAlignment="Left" Margin="555,10,0,0" TextWrapping="Wrap" Text="ชื่อ" VerticalAlignment="Top"/>
