@@ -144,8 +144,8 @@ namespace AnswerSheetChecker
             }
             int w = (bool)RadioButtonVertical.IsChecked ? int.Parse(TextBoxNumberChoice.Text) : int.Parse(TextBoxNumberAns.Text);
             int h = (bool)RadioButtonVertical.IsChecked ? int.Parse(TextBoxNumberAns.Text) : int.Parse(TextBoxNumberChoice.Text);
-            int x = int.Parse(TextBoxCol.Text);
-            int y = int.Parse(TextBoxRow.Text);
+            int x = int.Parse(TextBoxCol.Text) - 1;
+            int y = int.Parse(TextBoxRow.Text) - 1;
             if (y + h > template.RowSize.Count) return;
             for (int i = y; i < y + h; i++)
             {
