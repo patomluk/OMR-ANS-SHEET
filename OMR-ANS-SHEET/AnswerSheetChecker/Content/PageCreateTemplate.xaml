@@ -7,15 +7,36 @@
       mc:Ignorable="d" 
       d:DesignHeight="690" d:DesignWidth="1080"
       Title="PageCreateTemplate">
-
+    <Page.Resources>
+        <local:DataConverterOrderType x:Key="OrderTypeConverter"></local:DataConverterOrderType>
+        <local:DataConverterHumanStartNumber x:Key="HumanNumberConverter"></local:DataConverterHumanStartNumber>
+    </Page.Resources>
     <Grid>
         <Button x:Name="ButtonBack" Content="ย้อนกลับ" Margin="10,0,0,0" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="75" Click="ButtonBack_Click"/>
         <Button x:Name="ButtonNext" Content="ต่อไป" Margin="0,0,10,0" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Click="ButtonNext_Click"/>
+        <Button x:Name="ButtonEdit" Content="แก้ไข" Margin="0,0,90,0" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Click="ButtonEdit_Click"/>
         <Image x:Name="ImagePreview" Margin="10,10,554,37" MouseLeftButtonDown="ImagePreview_MouseLeftButtonDown"/>
         <Border BorderBrush="Black" BorderThickness="1" Margin="10,10,530,37"/>
         <Button x:Name="ButtonAddInfo" Content="เพิ่มชุดข้อมูล" Margin="555,10,0,0" VerticalAlignment="Top" Height="28" HorizontalAlignment="Left" Width="90" Click="ButtonAddInfo_Click"/>
         <Button x:Name="ButtonAddAns" Content="เพิ่มชุดคำตอบ" Margin="555,260,0,0" VerticalAlignment="Top" Height="28" HorizontalAlignment="Left" Width="90" Click="ButtonAddAns_Click"/>
-        <DataGrid x:Name="DataGridInfo" Margin="555,43,10,0" Height="200" VerticalAlignment="Top"/>
-        <DataGrid x:Name="DataGridAns" Margin="555,293,10,37"/>
+        <DataGrid x:Name="DataGridInfo" Margin="555,43,10,0" Height="200" VerticalAlignment="Top" AutoGenerateColumns="False" SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ชื่อ" Binding="{Binding Name}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="รูปแบบการเรียงข้อมูล" Binding="{Binding OrderType, Converter={StaticResource OrderTypeConverter}}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="จำนวนหลัก" Binding="{Binding Count}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="เริ่มหลักที่" Binding="{Binding StartX, Converter={StaticResource HumanNumberConverter}}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="เริ่มแถวที่" Binding="{Binding StartY, Converter={StaticResource HumanNumberConverter}}" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid x:Name="DataGridAns" Margin="555,293,10,37" AutoGenerateColumns="False" SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="เริ่มข้อที่" Binding="{Binding Offset, Converter={StaticResource HumanNumberConverter}}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="รูปแบบการเรียงข้อมูล" Binding="{Binding OrderType, Converter={StaticResource OrderTypeConverter}}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="จำนวนตัวเลือก" Binding="{Binding Length}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="จำนวนข้อ" Binding="{Binding Count}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="เริ่มหลักที่" Binding="{Binding StartX, Converter={StaticResource HumanNumberConverter}}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="เริ่มแถวที่" Binding="{Binding StartY, Converter={StaticResource HumanNumberConverter}}" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Page>

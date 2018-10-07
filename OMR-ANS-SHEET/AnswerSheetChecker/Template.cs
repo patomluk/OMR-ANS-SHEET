@@ -16,6 +16,7 @@ namespace AnswerSheetChecker
                 Vertical,
             }
             public String Name { get; }
+            public int Offset { get; }
             public Type OrderType { get; }
             public int Length { get; }
             public int Count { get; }
@@ -23,6 +24,7 @@ namespace AnswerSheetChecker
             public int StartY { get; }
             public TemplateData(string name, Type type, int length, int count, int x, int y)
             {
+                Offset = 0;
                 Name = name;
                 OrderType = type;
                 Length = length;
@@ -30,9 +32,10 @@ namespace AnswerSheetChecker
                 StartX = x;
                 StartY = y;
             }
-            public TemplateData(Type type, int length, int count, int x, int y)
+            public TemplateData(int offset, Type type, int length, int count, int x, int y)
             {
                 Name = "";
+                Offset = offset;
                 OrderType = type;
                 Length = length;
                 Count = count;

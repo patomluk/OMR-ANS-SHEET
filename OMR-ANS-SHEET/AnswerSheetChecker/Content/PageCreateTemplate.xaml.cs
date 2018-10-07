@@ -24,14 +24,18 @@ namespace AnswerSheetChecker.Content
         private Action<Template> next;
         private OMR.IOMR omr;
         private Template template;
+        private bool dirty;
         public PageCreateTemplate(TextBlock textBlockTitle, System.Drawing.Bitmap bitmap, Action back, Action<Template> next)
         {
+            dirty = true;
             textBlockTitle.Text = "สร้างรูปแบบกระดาษคำตอบ";
             this.back = back;
             this.next = next;
             omr = new OMR.OMRv1();
-            textBlockTitle.Text = "";
             InitializeComponent();
+            ButtonEdit.Visibility = Visibility.Hidden;
+            ButtonAddInfo.IsEnabled = true;
+            ButtonAddAns.IsEnabled = true;
             (var list, var size) = omr.GetPositionPoint(bitmap);
             template = new Template(bitmap, list, size);
             ImagePreview.Source = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(
@@ -39,6 +43,25 @@ namespace AnswerSheetChecker.Content
                 IntPtr.Zero,
                 System.Windows.Int32Rect.Empty,
                 BitmapSizeOptions.FromWidthAndHeight(bitmap.Width, bitmap.Height));
+            CheckNext();
+        }
+
+        public PageCreateTemplate(TextBlock textBlockTitle, Template template, Action back, Action<Template> next)
+        {
+            dirty = false;
+            textBlockTitle.Text = "รูปแบบกระดาษคำตอบ";
+            this.back = back;
+            this.next = next;
+            this.template = template;
+            InitializeComponent();
+            ButtonEdit.IsEnabled = true;
+            ButtonAddInfo.IsEnabled = false;
+            ButtonAddAns.IsEnabled = false;
+            ImagePreview.Source = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(
+                template.Image.GetHbitmap(),
+                IntPtr.Zero,
+                System.Windows.Int32Rect.Empty,
+                BitmapSizeOptions.FromWidthAndHeight(template.Image.Width, template.Image.Height));
             CheckNext();
         }
 
@@ -50,32 +73,22 @@ namespace AnswerSheetChecker.Content
 
         private void ButtonAddInfo_Click(object sender, RoutedEventArgs e)
         {
-            var win = new AddDataGroup(AddDataGroup.Type.Info, template, (AnswerSheetChecker.Template.TemplateData data) =>
+            var win = new AddDataGroup(template, (AnswerSheetChecker.Template.TemplateData data) =>
             {
                 template.InfoData.Add(data);
+                DataGridInfo.ItemsSource = null;
                 DataGridInfo.ItemsSource = template.InfoData;
-                DataGridInfo.Columns[0].Header = "ชื่อ";
-                DataGridInfo.Columns[1].Header = "รูปแบบ";
-                DataGridInfo.Columns[2].Header = "ตัวเลือก";
-                DataGridInfo.Columns[3].Header = "จำนวนข้อ";
-                DataGridInfo.Columns[4].Header = "เริ่มแนวที่";
-                DataGridInfo.Columns[5].Header = "เริ่มแถวที่";
             });
             win.ShowDialog();
         }
 
         private void ButtonAddAns_Click(object sender, RoutedEventArgs e)
         {
-            var win = new AddDataGroup(AddDataGroup.Type.Ans, template, (AnswerSheetChecker.Template.TemplateData data) =>
+            var win = new AddDataGroup(template, template.AnsData.Count == 0 ? new AnswerSheetChecker.Template.TemplateData() : template.AnsData[template.AnsData.Count - 1], (AnswerSheetChecker.Template.TemplateData data) =>
             {
                 template.AnsData.Add(data);
+                DataGridAns.ItemsSource = null;
                 DataGridAns.ItemsSource = template.AnsData;
-                DataGridAns.Columns[1].Header = "รูปแบบ";
-                DataGridAns.Columns[2].Header = "ตัวเลือก";
-                DataGridAns.Columns[3].Header = "จำนวนข้อ";
-                DataGridAns.Columns[4].Header = "เริ่มแนวที่";
-                DataGridAns.Columns[5].Header = "เริ่มแถวที่";
-                DataGridAns.Columns.RemoveAt(0);
                 CheckNext();
             });
             win.ShowDialog();
@@ -89,8 +102,25 @@ namespace AnswerSheetChecker.Content
         private void ButtonNext_Click(object sender, RoutedEventArgs e)
         {
             if (template.AnsData.Count == 0) return;
-            //TODO::Save
-            next(template);
+
+            Microsoft.Win32.SaveFileDialog saveFileDialog = new Microsoft.Win32.SaveFileDialog()
+            {
+                Title = "เรียกต้นแบบกระดาษคำตอบ",
+                Filter = "AnsSheetTemplate (*.ast)|*.ast",
+            };
+            if (saveFileDialog.ShowDialog() == true) /* ข้อมูลตารางจากรูป*/
+            {
+                if (dirty) FileSystem.TemplateFile.Save(template, saveFileDialog.FileName);
+                next(template);
+            }
+        }
+
+        private void ButtonEdit_Click(object sender, RoutedEventArgs e)
+        {
+            dirty = true;
+            ButtonEdit.IsEnabled = false;
+            ButtonAddInfo.IsEnabled = true;
+            ButtonAddAns.IsEnabled = true;
         }
 
         private void CheckNext()

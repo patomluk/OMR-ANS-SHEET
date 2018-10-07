@@ -69,6 +69,7 @@
     <Compile Include="AddDataGroup.xaml.cs">
       <DependentUpon>AddDataGroup.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Content\DataConverter.cs" />
     <Compile Include="Content\PageCreateTemplate.xaml.cs">
       <DependentUpon>PageCreateTemplate.xaml</DependentUpon>
     </Compile>
@@ -81,6 +82,7 @@
     <Compile Include="Content\PageSelectTemplate.xaml.cs">
       <DependentUpon>PageSelectTemplate.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FileSystem\TemplateFile.cs" />
     <Compile Include="Template.cs" />
     <Compile Include="WindowMain.xaml.cs">
       <DependentUpon>WindowMain.xaml</DependentUpon>
