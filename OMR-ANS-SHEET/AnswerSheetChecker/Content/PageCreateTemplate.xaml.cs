@@ -57,6 +57,8 @@ namespace AnswerSheetChecker.Content
             ButtonEdit.IsEnabled = true;
             ButtonAddInfo.IsEnabled = false;
             ButtonAddAns.IsEnabled = false;
+            ButtonRemoveInfo.IsEnabled = false;
+            ButtonRemoveAns.IsEnabled = false;
             ImagePreview.Source = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(
                 template.Image.GetHbitmap(),
                 IntPtr.Zero,
@@ -78,6 +80,7 @@ namespace AnswerSheetChecker.Content
                 template.InfoData.Add(data);
                 DataGridInfo.ItemsSource = null;
                 DataGridInfo.ItemsSource = template.InfoData;
+                CheckNext();
             });
             win.ShowDialog();
         }
@@ -92,6 +95,27 @@ namespace AnswerSheetChecker.Content
                 CheckNext();
             });
             win.ShowDialog();
+        }
+
+        private void ButtonRemoveInfo_Click(object sender, RoutedEventArgs e)
+        {
+            if (template.InfoData.Count <= 0) return;
+            if (DataGridInfo.SelectedIndex >= 0 && DataGridInfo.SelectedIndex < template.InfoData.Count)
+            {
+                template.InfoData.RemoveAt(DataGridInfo.SelectedIndex);
+                DataGridInfo.ItemsSource = null;
+                DataGridInfo.ItemsSource = template.InfoData;
+                CheckNext();
+            }
+        }
+
+        private void ButtonRemoveAns_Click(object sender, RoutedEventArgs e)
+        {
+            if (template.AnsData.Count <= 0) return;
+            template.AnsData.RemoveAt(template.AnsData.Count - 1);
+            DataGridAns.ItemsSource = null;
+            DataGridAns.ItemsSource = template.AnsData;
+            CheckNext();
         }
 
         private void ButtonBack_Click(object sender, RoutedEventArgs e)
@@ -121,11 +145,19 @@ namespace AnswerSheetChecker.Content
             ButtonEdit.IsEnabled = false;
             ButtonAddInfo.IsEnabled = true;
             ButtonAddAns.IsEnabled = true;
+            CheckNext();
         }
 
         private void CheckNext()
         {
             ButtonNext.IsEnabled = template.AnsData.Count != 0;
+            ButtonRemoveInfo.IsEnabled = template.InfoData.Count != 0 && DataGridInfo.SelectedIndex >= 0;
+            ButtonRemoveAns.IsEnabled = template.AnsData.Count != 0;
+        }
+
+        private void DataGridInfo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ButtonRemoveInfo.IsEnabled = template.InfoData.Count != 0 && DataGridInfo.SelectedIndex >= 0;
         }
     }
 }
