@@ -39,7 +39,7 @@ namespace AnswerSheetChecker
             }, ()=> {
                 var opFile = new Microsoft.Win32.OpenFileDialog()
                 {
-                    Title = "เรียกต้นแบบกระดาษคำตอบ",
+                    Title = "กระดาษคำตอบ",
                     Filter = "Image (*.jpg *.png)|*.jpg;*.png|Adobe Portable Document Format(*.pdf)|*.pdf",
                 };
                 if (opFile.ShowDialog() == true) /* ข้อมูลตารางจากรูป*/
@@ -69,8 +69,33 @@ namespace AnswerSheetChecker
                     //ChangeState(PageState.KeyAnswer);
                 }
             }, ()=> {
-
+                var opFile = new Microsoft.Win32.OpenFileDialog()
+                {
+                    Title = "เรียกต้นแบบกระดาษคำตอบ",
+                    Filter = "Answer Scoring Tamplate (*.ast)|*.ast",
+                };
+                if (opFile.ShowDialog() == true)
+                {
+                    var template = FileSystem.TemplateFile.Load(opFile.FileName);
+                    if (template != null)
+                    {
+                        ShowPageEditTemplate(template);
+                    }
+                }
             });
+        }
+
+        public void ShowPageEditTemplate(Template templateLoaded)
+        {
+            this.template = templateLoaded;
+            FrameContent.Content = new Content.PageCreateTemplate(TextBlockNamePage, template,
+                () => {
+                    ShowPageSelectTemplate();
+                },
+                (AnswerSheetChecker.Template template) => {
+                    this.template = template;
+                    ShowPageSelectKey();
+                });
         }
 
         public void ShowPageCreateTemplate(System.Drawing.Bitmap bitmap)

@@ -59,6 +59,8 @@ namespace AnswerSheetChecker.Content
             ButtonAddAns.IsEnabled = false;
             ButtonRemoveInfo.IsEnabled = false;
             ButtonRemoveAns.IsEnabled = false;
+            DataGridInfo.ItemsSource = template.InfoData;
+            DataGridAns.ItemsSource = template.AnsData;
             ImagePreview.Source = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(
                 template.Image.GetHbitmap(),
                 IntPtr.Zero,

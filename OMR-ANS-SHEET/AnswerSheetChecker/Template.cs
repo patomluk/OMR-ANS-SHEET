@@ -50,6 +50,21 @@ namespace AnswerSheetChecker
         public List<int> RowSize { get; }
         public List<int> RowOffset { get; }
         public System.Drawing.Bitmap Image { get; }
+        public Template(System.Drawing.Bitmap image, List<OMR.PointProperty> points, List<int> row, List<TemplateData> infoData, List<TemplateData> ansData)
+        {
+            InfoData = infoData;
+            AnsData = ansData;
+            RowOffset = new List<int>();
+            Image = image;
+            PointsList = points;
+            RowSize = row;
+            int sum = 0;
+            foreach (var item in RowSize)
+            {
+                sum += item;
+                RowOffset.Add(sum);
+            }
+        }
         public Template(System.Drawing.Bitmap image, List<OMR.PointProperty> points, List<int> row)
         {
             InfoData = new List<TemplateData>();
