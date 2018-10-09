@@ -117,9 +117,23 @@ namespace AnswerSheetChecker
                 () => {
                     ShowPageSelectTemplate();
                 },
-                (Key key)=>{
+                () => {
+                    ShowPageCreateKey();
+                },
+                (Dictionary<int, int> key)=>{
 
                 });
+        }
+
+        public void ShowPageCreateKey()
+        {
+            FrameContent.Content = new Content.PageCreateKey(TextBlockNamePage, template, 
+            () => {
+                ShowPageSelectKey();
+            },
+            (Dictionary<int, int> key) => {
+
+            });
         }
     }
 }

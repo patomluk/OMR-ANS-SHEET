@@ -81,26 +81,4 @@ namespace AnswerSheetChecker
             }
         }
     }
-
-    public class Key
-    {
-        private Dictionary<int, HashSet<int>> ans;
-        public Key()
-        {
-            ans = new Dictionary<int, HashSet<int>>();
-        }
-        public HashSet<int> GetAns(int n)
-        {
-            if (ans.TryGetValue(n, out HashSet<int> value))
-            {
-                return value;
-            }
-            ans[n] = new HashSet<int>();
-            return ans[n];
-        }
-        public void SetAns(int n, int c)
-        {
-            GetAns(n).Add(c);
-        }
-    }
 }

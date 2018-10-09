@@ -129,14 +129,21 @@ namespace AnswerSheetChecker.Content
         {
             if (template.AnsData.Count == 0) return;
 
-            Microsoft.Win32.SaveFileDialog saveFileDialog = new Microsoft.Win32.SaveFileDialog()
+            if (dirty)
             {
-                Title = "เรียกต้นแบบกระดาษคำตอบ",
-                Filter = "AnsSheetTemplate (*.ast)|*.ast",
-            };
-            if (saveFileDialog.ShowDialog() == true) /* ข้อมูลตารางจากรูป*/
+                Microsoft.Win32.SaveFileDialog saveFileDialog = new Microsoft.Win32.SaveFileDialog()
+                {
+                    Title = "เรียกต้นแบบกระดาษคำตอบ",
+                    Filter = "AnsSheetTemplate (*.ast)|*.ast",
+                };
+                if (saveFileDialog.ShowDialog() == true) /* ข้อมูลตารางจากรูป*/
+                {
+                    FileSystem.TemplateFile.Save(template, saveFileDialog.FileName);
+                    next(template);
+                }
+            }
+            else
             {
-                if (dirty) FileSystem.TemplateFile.Save(template, saveFileDialog.FileName);
                 next(template);
             }
         }
@@ -153,8 +160,8 @@ namespace AnswerSheetChecker.Content
         private void CheckNext()
         {
             ButtonNext.IsEnabled = template.AnsData.Count != 0;
-            ButtonRemoveInfo.IsEnabled = template.InfoData.Count != 0 && DataGridInfo.SelectedIndex >= 0;
-            ButtonRemoveAns.IsEnabled = template.AnsData.Count != 0;
+            ButtonRemoveInfo.IsEnabled = template.InfoData.Count != 0 && DataGridInfo.SelectedIndex >= 0 && dirty;
+            ButtonRemoveAns.IsEnabled = template.AnsData.Count != 0 && dirty;
         }
 
         private void DataGridInfo_SelectionChanged(object sender, SelectionChangedEventArgs e)

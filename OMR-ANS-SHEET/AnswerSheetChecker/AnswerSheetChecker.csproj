@@ -70,6 +70,9 @@
       <DependentUpon>AddDataGroup.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\DataConverter.cs" />
+    <Compile Include="Content\PageCreateKey.xaml.cs">
+      <DependentUpon>PageCreateKey.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Content\PageCreateTemplate.xaml.cs">
       <DependentUpon>PageCreateTemplate.xaml</DependentUpon>
     </Compile>
@@ -91,6 +94,10 @@
       <DependentUpon>WindowSelectPage.xaml</DependentUpon>
     </Compile>
     <Page Include="AddDataGroup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\PageCreateKey.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

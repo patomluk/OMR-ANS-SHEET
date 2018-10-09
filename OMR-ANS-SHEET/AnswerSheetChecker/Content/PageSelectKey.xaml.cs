@@ -21,12 +21,14 @@ namespace AnswerSheetChecker.Content
     public partial class PageSelectKey : Page
     {
         Action back;
-        Action<Key> next;
+        Action make;
+        Action<Dictionary<int, int>> next;
 
-        public PageSelectKey(TextBlock textBlockTitle, AnswerSheetChecker.Template template, Action back, Action<Key> next)
+        public PageSelectKey(TextBlock textBlockTitle, AnswerSheetChecker.Template template, Action back, Action make, Action<Dictionary<int, int>> next)
         {
             this.back = back;
             this.next = next;
+            this.make = make;
             textBlockTitle.Text = "ตั้งค่าเฉลย";
             InitializeComponent();
         }
@@ -73,7 +75,7 @@ namespace AnswerSheetChecker.Content
 
         private void ButtonMake_Click(object sender, RoutedEventArgs e)
         {
-
+            make();
         }
 
         private void ButtonBack_Click(object sender, RoutedEventArgs e)
