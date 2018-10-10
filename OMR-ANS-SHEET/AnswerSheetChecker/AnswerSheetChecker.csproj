@@ -90,6 +90,7 @@
     </Compile>
     <Compile Include="FileSystem\KeyFile.cs" />
     <Compile Include="FileSystem\TemplateFile.cs" />
+    <Compile Include="Helper.cs" />
     <Compile Include="Template.cs" />
     <Compile Include="WindowMain.xaml.cs">
       <DependentUpon>WindowMain.xaml</DependentUpon>

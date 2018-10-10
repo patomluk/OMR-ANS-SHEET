@@ -92,7 +92,23 @@ namespace AnswerSheetChecker
         {
             Index = index;
             MaxChoice = max;
+            this.select = select;
+        }
+    }
+
+    public class AnswerDataChecker
+    {
+        public int Index { get; }
+        public int MaxChoice { get; }
+        public int Select { get; }
+        public int Key { get; }
+        public bool Correct { get { return Key != 0 && Select == Key; } }
+        public AnswerDataChecker(int index, int max, int select, int key)
+        {
+            Index = index;
+            MaxChoice = max;
             Select = select;
+            Key = key;
         }
     }
 }

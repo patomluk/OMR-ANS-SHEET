@@ -37,52 +37,10 @@ namespace AnswerSheetChecker
         {
             FrameContent.Content = new Content.PageSelectTemplate(TextBlockNamePage, ()=> {
                 ShowPageHome();
-            }, ()=> {
-                var opFile = new Microsoft.Win32.OpenFileDialog()
-                {
-                    Title = "กระดาษคำตอบ",
-                    Filter = "Image (*.jpg *.png)|*.jpg;*.png|Adobe Portable Document Format(*.pdf)|*.pdf",
-                };
-                if (opFile.ShowDialog() == true) /* ข้อมูลตารางจากรูป*/
-                {
-                    string ext = System.IO.Path.GetExtension(opFile.FileName);
-                    System.Drawing.Bitmap bitmap = null;
-                    switch (ext)
-                    {
-                        case ".png":
-                        case ".jpg":
-                            bitmap = new System.Drawing.Bitmap(opFile.FileName);
-                            break;
-                        case ".pdf":
-                            var images = new List<System.Drawing.Image>();
-                            //var pdf = new org.pdfclown.files.File(opFile.FileName);
-                            //var renderer = new org.pdfclown.tools.Renderer();
-                            //for (int i = 0; i < pdf.Document.Pages.Count; i++) images.Add(renderer.Render(pdf.Document.Pages[i], pdf.Document.Pages[i].Size));
-                            var winSelect = new WindowSelectPage(images, (int page) => { if (page < 0) return; bitmap = new System.Drawing.Bitmap(images[page]); });
-                            winSelect.ShowDialog();
-                            break;
-                        default:
-                            break;
-                    }
-                    if (bitmap == null) return;
-                    ShowPageCreateTemplate(bitmap);
-                    //(List<OMR.PointProperty> point, List<int> rowSize) = omr.GetPositionPoint(bitmap, false);
-                    //ChangeState(PageState.KeyAnswer);
-                }
-            }, ()=> {
-                var opFile = new Microsoft.Win32.OpenFileDialog()
-                {
-                    Title = "เรียกต้นแบบกระดาษคำตอบ",
-                    Filter = "Answer Scoring Tamplate (*.ast)|*.ast",
-                };
-                if (opFile.ShowDialog() == true)
-                {
-                    var template = FileSystem.TemplateFile.Load(opFile.FileName);
-                    if (template != null)
-                    {
-                        ShowPageEditTemplate(template);
-                    }
-                }
+            }, (System.Drawing.Bitmap bitmap)=> {
+                ShowPageCreateTemplate(bitmap);
+            }, (Template template)=> {
+                ShowPageEditTemplate(template);
             });
         }
 
@@ -122,8 +80,8 @@ namespace AnswerSheetChecker
                 () => {
                     ShowPageCreateKey();
                 },
-                (List<AnswerData> key) =>{
-                    ShowPageEditKey(key);
+                (List<AnswerData> key, bool save) =>{
+                    ShowPageEditKey(key, save);
                 });
         }
 
@@ -140,7 +98,7 @@ namespace AnswerSheetChecker
             });
         }
 
-        public void ShowPageEditKey(List<AnswerData> keyLoaded)
+        public void ShowPageEditKey(List<AnswerData> keyLoaded, bool save)
         {
             FrameContent.Content = new Content.PageCreateKey(TextBlockNamePage, template,
             () => {
@@ -149,7 +107,7 @@ namespace AnswerSheetChecker
             (List<AnswerData> key) => {
                 this.key = key;
                 ShowPageSelectAnswer();
-            }, keyLoaded);
+            }, keyLoaded, save);
         }
 
         public void ShowPageSelectAnswer()

@@ -25,7 +25,7 @@ namespace AnswerSheetChecker.Content
         private Action<List<AnswerData>> next;
         private List<AnswerData> key;
 
-        public PageCreateKey(TextBlock textBlockTitle, Template template, Action back, Action<List<AnswerData>> next, List<AnswerData> key = null)
+        public PageCreateKey(TextBlock textBlockTitle, Template template, Action back, Action<List<AnswerData>> next, List<AnswerData> key = null, bool save = false)
         {
             this.back = back;
             this.next = next;
@@ -43,7 +43,7 @@ namespace AnswerSheetChecker.Content
             }
             else
             {
-                dirty = false;
+                dirty = save;
                 this.key = key;
             }
             textBlockTitle.Text = "สร้างเฉลย";
