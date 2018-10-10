@@ -20,15 +20,43 @@ namespace AnswerSheetChecker.Content
     /// </summary>
     public partial class PageSelectAnswer : Page
     {
-        public PageSelectAnswer(TextBlock textBlockTitle)
+        private Template template;
+        private List<AnswerData> key;
+        private Action back;
+        private int maxScore;
+
+        public PageSelectAnswer(TextBlock textBlockTitle, Template template, List<AnswerData> key, Action back)
         {
+            this.template = template;
+            this.key = key;
+            this.back = back;
             textBlockTitle.Text = "ตรวจคำตอบ";
+            maxScore = 0;
+            foreach (var item in key) if (item.Select != 0) maxScore++;
             InitializeComponent();
         }
 
         private void ButtonBack_Click(object sender, RoutedEventArgs e)
         {
+            back();
+        }
 
+        private void ButtonLoad_Click(object sender, RoutedEventArgs e)
+        {
+            var bitmap = Helper.LoadImage("เรียกกระดาษคำตอบ");
+            if (bitmap == null) return;
+            (var ansData, var info) = Helper.GetAnswerData(template, bitmap, true);
+            if (ansData == null) return;
+            List<AnswerDataChecker> answerDataCheckers = new List<AnswerDataChecker>();
+            for (int i = 0; i < key.Count; i++)
+            {
+                answerDataCheckers.Add(new AnswerDataChecker(key[i].Index, key[i].MaxChoice, ansData[i].Select, key[i].Select));
+            }
+            int score = 0;
+            foreach (var item in answerDataCheckers) if (item.Correct) score++;
+            DataGridInfo.ItemsSource = info;
+            DataGridResult.ItemsSource = answerDataCheckers;
+            TextBoxScore.Text = string.Format("{0}/{1}", score, maxScore);
         }
     }
 }

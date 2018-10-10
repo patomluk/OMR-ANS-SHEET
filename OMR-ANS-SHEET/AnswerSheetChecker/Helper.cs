@@ -41,14 +41,15 @@ namespace AnswerSheetChecker
             return null;
         }
 
-        public static List<AnswerData> GetAnswerData(Template template, System.Drawing.Bitmap bitmap)
+        public static (List<AnswerData>, List<InfoData>) GetAnswerData(Template template, System.Drawing.Bitmap bitmap, bool getInfo = false)
         {
             OMR.IOMR omr = new OMR.OMRv1();
             (List<OMR.PointProperty> point, List<int> rowSize) = omr.GetPositionPoint(bitmap, true);
-            if (point.Count != template.PointsList.Count || rowSize.Count != template.RowSize.Count) return null;
-            for (int i = 0; i < rowSize.Count; i++) if (rowSize[i] != template.RowSize[i]) return null;
+            if (point.Count != template.PointsList.Count || rowSize.Count != template.RowSize.Count) return (null, null);
+            for (int i = 0; i < rowSize.Count; i++) if (rowSize[i] != template.RowSize[i]) return (null, null);
 
             var key = new List<AnswerData>();
+            var info = new List<InfoData>();
             foreach (var item in template.AnsData)
             {
                 for (int i = 0; i < item.Count; i++)
@@ -72,7 +73,37 @@ namespace AnswerSheetChecker
                     key.Add(new AnswerData(item.Offset + i, item.Length, select));
                 }
             }
-            return key;
+
+            if (getInfo)
+            {
+                foreach (var item in template.InfoData)
+                {
+                    string sum = "";
+                    for (int i = 0; i < item.Count; i++)
+                    {
+                        int value = 0;
+                        for (int j = 0; j < item.Length; j++)
+                        {
+                            if (point[template.RowOffset[item.StartY] + item.StartX].IsCheck)
+                            {
+                                if (value == 0)
+                                {
+                                    value = j;
+                                }
+                                else
+                                {
+                                    value = 0;
+                                    break;
+                                }
+                            }
+                        }
+                        sum += value.ToString();
+                    }
+                    info.Add(new InfoData(item.Name, item.Count, int.Parse(sum)));
+                }
+            }
+
+            return (key, info);
         }
     }
 }

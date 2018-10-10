@@ -57,7 +57,7 @@ namespace AnswerSheetChecker.Content
             var bitmap = Helper.LoadImage("เรียกกระดาษคำตอบ(เฉลย)");
             if (bitmap == null) return;
 
-            var key = Helper.GetAnswerData(template, bitmap);
+            (var key, var info) = Helper.GetAnswerData(template, bitmap);
 
             next(key, true);
         }

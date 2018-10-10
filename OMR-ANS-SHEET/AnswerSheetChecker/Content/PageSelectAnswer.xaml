@@ -5,10 +5,33 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:AnswerSheetChecker.Content"
       mc:Ignorable="d" 
-      d:DesignHeight="690" d:DesignWidth="1080"
+      d:DesignHeight="620" d:DesignWidth="1080"
       Title="PageSelectAnswer">
+    <Page.Resources>
+        <local:DataConverterHumanStartNumber x:Key="HumanNumberConverter"/>
+        <local:DataConverterHumanBoolConverter x:Key="HumanBoolConverter"/>
+    </Page.Resources>
 
     <Grid>
         <Button x:Name="ButtonBack" Content="ย้อนกลับ" Margin="10,0,0,0" Height="32" VerticalAlignment="Bottom" Click="ButtonBack_Click" HorizontalAlignment="Left" Width="75"/>
+        <Button x:Name="ButtonLoad" Content="เรียกกระดาษคำตอบ" Margin="814,10,10,0" Height="94" VerticalAlignment="Top" Click="ButtonLoad_Click"/>
+        <DataGrid x:Name="DataGridInfo" Margin="10,10,812,0" AutoGenerateColumns="False" Height="530" VerticalAlignment="Top">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ชื่อ" Binding="{Binding Name}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="ข้อมูล" Binding="{Binding DataDisplay}" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid x:Name="DataGridResult" Margin="273,10,271,0" AutoGenerateColumns="False" Height="530" VerticalAlignment="Top">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ข้อที่" Binding="{Binding Index, Converter={StaticResource HumanNumberConverter}}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="จำนวนตัวเลือก" Binding="{Binding MaxChoice}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="ตอบ" Binding="{Binding Select}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="เฉลย" Binding="{Binding Key}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="ผลลัพธ์" Binding="{Binding Correct, Converter={StaticResource HumanBoolConverter}}" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <TextBox x:Name="TextBoxScore" Margin="0,0,271,39" TextWrapping="Wrap" Text="0/0" IsReadOnly="True" TextAlignment="Center" HorizontalAlignment="Right" Width="722" Height="22" VerticalAlignment="Bottom"/>
+        <TextBlock Margin="10,0,0,39" TextWrapping="Wrap" Text="คะแนนรวม" HorizontalAlignment="Left" Width="72" Height="22" VerticalAlignment="Bottom"/>
+
     </Grid>
 </Page>
