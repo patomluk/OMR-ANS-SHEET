@@ -133,7 +133,7 @@ namespace AnswerSheetChecker.Content
             {
                 Microsoft.Win32.SaveFileDialog saveFileDialog = new Microsoft.Win32.SaveFileDialog()
                 {
-                    Title = "เรียกต้นแบบกระดาษคำตอบ",
+                    Title = "บันทึกต้นแบบกระดาษคำตอบ",
                     Filter = "AnsSheetTemplate (*.ast)|*.ast",
                 };
                 if (saveFileDialog.ShowDialog() == true) /* ข้อมูลตารางจากรูป*/

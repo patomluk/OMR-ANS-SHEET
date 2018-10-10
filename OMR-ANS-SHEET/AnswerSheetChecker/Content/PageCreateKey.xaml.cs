@@ -20,17 +20,35 @@ namespace AnswerSheetChecker.Content
     /// </summary>
     public partial class PageCreateKey : Page
     {
-        Action back;
-        Action<Dictionary<int, int>> next;
-        Dictionary<int, int> key;
+        private bool dirty;
+        private Action back;
+        private Action<List<AnswerData>> next;
+        private List<AnswerData> key;
 
-        public PageCreateKey(TextBlock textBlockTitle, Template template, Action back, Action<Dictionary<int, int>> next)
+        public PageCreateKey(TextBlock textBlockTitle, Template template, Action back, Action<List<AnswerData>> next, List<AnswerData> key = null)
         {
             this.back = back;
             this.next = next;
-            key = new Dictionary<int, int>();
+            if (key == null)
+            {
+                dirty = true;
+                this.key = new List<AnswerData>();
+                foreach (var item in template.AnsData)
+                {
+                    for (int i = 0; i < item.Count; i++)
+                    {
+                        this.key.Add(new AnswerData(item.Offset + i, item.Length, 0));
+                    }
+                }
+            }
+            else
+            {
+                dirty = false;
+                this.key = key;
+            }
             textBlockTitle.Text = "สร้างเฉลย";
             InitializeComponent();
+            DataGridKey.ItemsSource = this.key;
         }
 
         private void ButtonBack_Click(object sender, RoutedEventArgs e)
@@ -40,7 +58,28 @@ namespace AnswerSheetChecker.Content
 
         private void ButtonNext_Click(object sender, RoutedEventArgs e)
         {
-            next(key);
+            if (dirty)
+            {
+                Microsoft.Win32.SaveFileDialog saveFileDialog = new Microsoft.Win32.SaveFileDialog()
+                {
+                    Title = "บันทึกชุดคำตอบ",
+                    Filter = "AnsSheetKey (*.ask)|*.ask",
+                };
+                if (saveFileDialog.ShowDialog() == true) /* ข้อมูลตารางจากรูป*/
+                {
+                    FileSystem.KeyFile.Save(key, saveFileDialog.FileName);
+                    next(key);
+                }
+            }
+            else
+            {
+                next(key);
+            }
+        }
+
+        private void DataGridKey_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        {
+            dirty = true;
         }
     }
 }

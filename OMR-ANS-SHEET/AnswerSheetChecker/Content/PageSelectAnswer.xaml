@@ -1,0 +1,14 @@
+﻿<Page x:Class="AnswerSheetChecker.Content.PageSelectAnswer"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AnswerSheetChecker.Content"
+      mc:Ignorable="d" 
+      d:DesignHeight="690" d:DesignWidth="1080"
+      Title="PageSelectAnswer">
+
+    <Grid>
+        <Button x:Name="ButtonBack" Content="ย้อนกลับ" Margin="10,0,0,0" Height="32" VerticalAlignment="Bottom" Click="ButtonBack_Click" HorizontalAlignment="Left" Width="75"/>
+    </Grid>
+</Page>

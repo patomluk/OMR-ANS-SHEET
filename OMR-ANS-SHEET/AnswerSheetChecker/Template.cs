@@ -81,4 +81,18 @@ namespace AnswerSheetChecker
             }
         }
     }
+
+    public class AnswerData
+    {
+        public int Index { get; }
+        public int MaxChoice { get; }
+        public int Select { get { return select; } set { if (value < 0) select = 0; else if (value > MaxChoice) select = MaxChoice; else select = value; } }
+        private int select;
+        public AnswerData(int index, int max, int select = 0)
+        {
+            Index = index;
+            MaxChoice = max;
+            Select = select;
+        }
+    }
 }

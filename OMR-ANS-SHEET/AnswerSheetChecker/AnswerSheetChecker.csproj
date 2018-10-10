@@ -79,12 +79,16 @@
     <Compile Include="Content\PageHome.xaml.cs">
       <DependentUpon>PageHome.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Content\PageSelectAnswer.xaml.cs">
+      <DependentUpon>PageSelectAnswer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Content\PageSelectKey.xaml.cs">
       <DependentUpon>PageSelectKey.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\PageSelectTemplate.xaml.cs">
       <DependentUpon>PageSelectTemplate.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FileSystem\KeyFile.cs" />
     <Compile Include="FileSystem\TemplateFile.cs" />
     <Compile Include="Template.cs" />
     <Compile Include="WindowMain.xaml.cs">
@@ -102,6 +106,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Content\PageCreateTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\PageSelectAnswer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

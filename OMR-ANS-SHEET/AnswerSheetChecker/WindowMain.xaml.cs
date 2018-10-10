@@ -19,7 +19,8 @@ namespace AnswerSheetChecker
     /// </summary>
     public partial class WindowMain : Window
     {
-        AnswerSheetChecker.Template template;
+        Template template;
+        List<AnswerData> key;
 
         public WindowMain()
         {
@@ -115,13 +116,14 @@ namespace AnswerSheetChecker
         {
             FrameContent.Content = new Content.PageSelectKey(TextBlockNamePage, template,
                 () => {
+                    key = null;
                     ShowPageSelectTemplate();
                 },
                 () => {
                     ShowPageCreateKey();
                 },
-                (Dictionary<int, int> key)=>{
-
+                (List<AnswerData> key) =>{
+                    ShowPageEditKey(key);
                 });
         }
 
@@ -129,11 +131,30 @@ namespace AnswerSheetChecker
         {
             FrameContent.Content = new Content.PageCreateKey(TextBlockNamePage, template, 
             () => {
+                key = null;
                 ShowPageSelectKey();
             },
-            (Dictionary<int, int> key) => {
-
+            (List<AnswerData> key) => {
+                this.key = key;
+                ShowPageSelectAnswer();
             });
+        }
+
+        public void ShowPageEditKey(List<AnswerData> keyLoaded)
+        {
+            FrameContent.Content = new Content.PageCreateKey(TextBlockNamePage, template,
+            () => {
+                ShowPageSelectKey();
+            },
+            (List<AnswerData> key) => {
+                this.key = key;
+                ShowPageSelectAnswer();
+            }, keyLoaded);
+        }
+
+        public void ShowPageSelectAnswer()
+        {
+            FrameContent.Content = new Content.PageSelectAnswer(TextBlockNamePage);
         }
     }
 }

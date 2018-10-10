@@ -7,9 +7,18 @@
       mc:Ignorable="d" 
       d:DesignHeight="690" d:DesignWidth="1080"
       Title="PageCreateKey">
-
+    <Page.Resources>
+        <local:DataConverterHumanStartNumber x:Key="HumanNumberConverter"></local:DataConverterHumanStartNumber>
+    </Page.Resources>
     <Grid>
         <Button x:Name="ButtonBack" Content="ย้อนกลับ" Margin="10,0,0,0" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="75" Click="ButtonBack_Click"/>
         <Button x:Name="ButtonNext" Content="ต่อไป" Margin="0,0,10,0" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Click="ButtonNext_Click"/>
+        <DataGrid x:Name="DataGridKey" Margin="10,10,10,37" AutoGenerateColumns="False" CellEditEnding="DataGridKey_CellEditEnding">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ข้อที่" Binding="{Binding Index, Converter={StaticResource HumanNumberConverter}}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="จำนวนตัวเลือก" Binding="{Binding MaxChoice}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="ข้อถูก" Binding="{Binding Select}" IsReadOnly="False"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Page>

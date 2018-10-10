@@ -20,12 +20,14 @@ namespace AnswerSheetChecker.Content
     /// </summary>
     public partial class PageSelectKey : Page
     {
-        Action back;
-        Action make;
-        Action<Dictionary<int, int>> next;
+        private Action back;
+        private Action make;
+        private Action<List<AnswerData>> next;
+        private Template template;
 
-        public PageSelectKey(TextBlock textBlockTitle, AnswerSheetChecker.Template template, Action back, Action make, Action<Dictionary<int, int>> next)
+        public PageSelectKey(TextBlock textBlockTitle, Template template, Action back, Action make, Action<List<AnswerData>> next)
         {
+            this.template = template;
             this.back = back;
             this.next = next;
             this.make = make;
@@ -35,7 +37,19 @@ namespace AnswerSheetChecker.Content
 
         private void ButtonLoad_Click(object sender, RoutedEventArgs e)
         {
-
+            var opFile = new Microsoft.Win32.OpenFileDialog()
+            {
+                Title = "เรียกชุดคำตอบ",
+                Filter = "AnsSheetKey (*.ask)|*.ask",
+            };
+            if (opFile.ShowDialog() == true)
+            {
+                var key = FileSystem.KeyFile.Load(opFile.FileName, template);
+                if (key != null)
+                {
+                    next(key);
+                }
+            }
         }
 
         private void ButtonCreate_Click(object sender, RoutedEventArgs e)
