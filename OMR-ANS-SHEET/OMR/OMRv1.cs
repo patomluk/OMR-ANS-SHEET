@@ -122,7 +122,7 @@ namespace OMR
                     //}
                     for (int k = 0; k < pointProperty.Count; k++)
                     {
-                        if (AnsPoint[i].X < pointProperty[k].Position.X + pointProperty[k].Rad && AnsPoint[i].Y < pointProperty[k].Position.Y + pointProperty[k].Rad && AnsPoint[i].X > pointProperty[k].Position.X - pointProperty[k].Rad && AnsPoint[i].Y > pointProperty[k].Position.Y - pointProperty[k].Rad)
+                        if ( (AnsPoint[i].X < pointProperty[k].Position.X + pointProperty[k].Rad ) && ( AnsPoint[i].Y < pointProperty[k].Position.Y + pointProperty[k].Rad ) && ( AnsPoint[i].X > pointProperty[k].Position.X - pointProperty[k].Rad ) && ( AnsPoint[i].Y > pointProperty[k].Position.Y - pointProperty[k].Rad ) )
                         {
                             pointProperty[k] = new PointProperty(pointProperty[k].Position, pointProperty[k].Rad, true);
                         }

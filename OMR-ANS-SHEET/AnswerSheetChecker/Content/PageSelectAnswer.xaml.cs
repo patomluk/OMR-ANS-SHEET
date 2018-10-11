@@ -58,5 +58,10 @@ namespace AnswerSheetChecker.Content
             DataGridResult.ItemsSource = answerDataCheckers;
             TextBoxScore.Text = string.Format("{0}/{1}", score, maxScore);
         }
+
+        private void DataGridResult_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
