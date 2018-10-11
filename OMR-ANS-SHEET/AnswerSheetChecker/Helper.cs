@@ -57,7 +57,13 @@ namespace AnswerSheetChecker
                     int select = 0;
                     for (int j = 0; j < item.Length; j++)
                     {
-                        if (point[template.RowOffset[item.StartY] + item.StartX].IsCheck)
+                        int x = item.StartX;
+                        int y = item.StartY;
+                        if (item.OrderType == Template.TemplateData.Type.Horizontal)
+                            y += j;
+                        else
+                            x += j;
+                        if (point[template.RowOffset[y] + x].IsCheck)
                         {
                             if (select == 0)
                             {
@@ -84,7 +90,13 @@ namespace AnswerSheetChecker
                         int value = 0;
                         for (int j = 0; j < item.Length; j++)
                         {
-                            if (point[template.RowOffset[item.StartY] + item.StartX].IsCheck)
+                            int x = item.StartX;
+                            int y = item.StartY;
+                            if (item.OrderType == Template.TemplateData.Type.Horizontal)
+                                y += j;
+                            else
+                                x += j;
+                            if (point[template.RowOffset[y] + x].IsCheck)
                             {
                                 if (value == 0)
                                 {

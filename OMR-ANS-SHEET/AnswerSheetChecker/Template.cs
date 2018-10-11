@@ -59,6 +59,7 @@ namespace AnswerSheetChecker
             PointsList = points;
             RowSize = row;
             int sum = 0;
+            RowOffset.Add(0);
             foreach (var item in RowSize)
             {
                 sum += item;
