@@ -33,23 +33,12 @@ namespace OMR
             /////////////////////////////////////////////////////////////////////////////////////////////
             Image<Rgb, byte> img = new Image<Rgb, byte>(bitmap);
             Image<Gray, byte> imageGray = img.Convert<Gray, byte>();
-            //imageGray.Bitmap.Save(@"D:\WORK\sheetStart2.jpg");
-            //Console.WriteLine("convert to img-gray complete : D:\\WORK\\sheetStart2.jpg");
-            //Console.ReadKey(true);
             UMat uimage = new UMat();
             CvInvoke.CvtColor(img, uimage, ColorConversion.Bgr2Gray);
-            //img.Bitmap.Save(@"D:\WORK\sheetStart3.jpg");
-            //Console.WriteLine("convert to Color complete : D:\\WORK\\sheetStart3.jpg");
-            //Console.ReadKey(true);
             UMat pyrDown = new UMat();
             CvInvoke.PyrDown(uimage, pyrDown);
             CvInvoke.PyrUp(pyrDown, uimage);
-            //uimage.Bitmap.Save(@"D:\WORK\sheetStart4.jpg");
-            //Console.WriteLine("clear noise complete : D:\\WORK\\sheetStart4.jpg");
-            //Console.ReadKey(true);
             CircleF[] circles = CvInvoke.HoughCircles(uimage, HoughType.Gradient, 1, 20, 20, 15, 16, 18);
-            //uimage.Bitmap.Save(@"D:\WORK\sheetStart5.jpg");
-            //Console.ReadKey(true);
             Image<Rgb, Byte> circleImage = img.CopyBlank();
             double x;//row
             double y;//col
@@ -89,17 +78,58 @@ namespace OMR
                     y_max = MyPoints[i].Y + Dist / 2;
                     this_row++;
                     MyRows.Add(new MyRow(MyPoints[i]));
-                    
                 }
             }
-            foreach (var item in MyRows)
-            {
-                pointProperty.Add(new PointProperty(new Point((int)item.point.X, (int)item.point.Y), (int)Dist, false));
-            }
+
             rowSize.Add(MyRows.Count);
             if (getCheck) // check ans
-            { 
+            {
+                /// start
+                foreach (var item in MyRows)
+                {
+                    pointProperty.Add(new PointProperty(new Point((int)item.point.X, (int)item.point.Y), (int)Dist, false));
+                    img.Draw(new CircleF(new PointF((float)item.point.X, (float)item.point.Y), (float)item.point.Rad), new Rgb(Color.White), 9);
+                }
 
+                //for (int i = 0; i < SortRow.Count; i++)
+                //{
+                //    img.Draw(new CircleF(new PointF((float)SortRow[i].X, (float)SortRow[i].Y), (float)SortRow[i].Rad), new Rgb(Color.White), 9);
+                //}
+                CvInvoke.CvtColor(img, uimage, ColorConversion.Rgba2Gray);
+                CvInvoke.PyrDown(uimage, pyrDown);
+                CvInvoke.PyrUp(pyrDown, uimage);
+                CvInvoke.AdaptiveThreshold(uimage, uimage, 255, Emgu.CV.CvEnum.AdaptiveThresholdType.MeanC, Emgu.CV.CvEnum.ThresholdType.Binary, 999, 99);//149,99,79,59,39,19
+                CircleF[] circles2 = CvInvoke.HoughCircles(uimage, HoughType.Gradient, 1, 20, 20, 8, 9, 14);
+                var AnsPoint = new List<MyPoint>();
+                for (int i = 0; i < circles2.Length; i++)
+                {
+                    //circleImage.Draw(circles[i], new Rgb(Color.Red), 1);
+                    img.Draw(circles2[i], new Rgb(Color.Green), 3);
+                    x = Math.Round(circles2[i].Center.X, 0);
+                    y = Math.Round(circles2[i].Center.Y, 0);
+                    r = Math.Round(circles2[i].Radius, 0);
+                    AnsPoint.Add(new MyPoint(x, y, r));
+                }
+
+                for (int i = 0; i < AnsPoint.Count; i++)
+                {
+                    //foreach (var item in pointProperty)
+                    //{
+                    //    if (AnsPoint[i].X < item.Position.X + item.Rad && AnsPoint[i].Y < item.Position.Y + item.Rad && AnsPoint[i].X > item.Position.X - item.Rad && AnsPoint[i].Y > item.Position.Y - item.Rad)
+                    //    {
+                    //        item.IsCheck=true;
+                    //    }
+                    //}
+                    for (int k = 0; k < pointProperty.Count; k++)
+                    {
+                        if (AnsPoint[i].X < pointProperty[k].Position.X + pointProperty[k].Rad && AnsPoint[i].Y < pointProperty[k].Position.Y + pointProperty[k].Rad && AnsPoint[i].X > pointProperty[k].Position.X - pointProperty[k].Rad && AnsPoint[i].Y > pointProperty[k].Position.Y - pointProperty[k].Rad)
+                        {
+                            pointProperty[k] = new PointProperty(pointProperty[k].Position, pointProperty[k].Rad, true);
+                        }
+                    }
+                }
+
+                /// end
             }
             return (pointProperty, rowSize);
         }
