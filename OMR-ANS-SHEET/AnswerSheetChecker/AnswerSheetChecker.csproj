@@ -69,11 +69,18 @@
     <Compile Include="AddDataGroup.xaml.cs">
       <DependentUpon>AddDataGroup.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Content\DataConverter.cs" />
+    <Compile Include="Content\PageCreateKey.xaml.cs">
+      <DependentUpon>PageCreateKey.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Content\PageCreateTemplate.xaml.cs">
       <DependentUpon>PageCreateTemplate.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\PageHome.xaml.cs">
       <DependentUpon>PageHome.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\PageSelectAnswer.xaml.cs">
+      <DependentUpon>PageSelectAnswer.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\PageSelectKey.xaml.cs">
       <DependentUpon>PageSelectKey.xaml</DependentUpon>
@@ -81,6 +88,9 @@
     <Compile Include="Content\PageSelectTemplate.xaml.cs">
       <DependentUpon>PageSelectTemplate.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FileSystem\KeyFile.cs" />
+    <Compile Include="FileSystem\TemplateFile.cs" />
+    <Compile Include="Helper.cs" />
     <Compile Include="Template.cs" />
     <Compile Include="WindowMain.xaml.cs">
       <DependentUpon>WindowMain.xaml</DependentUpon>
@@ -92,7 +102,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Content\PageCreateKey.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Content\PageCreateTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\PageSelectAnswer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -104,16 +122,8 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Content\PageHome.xaml">

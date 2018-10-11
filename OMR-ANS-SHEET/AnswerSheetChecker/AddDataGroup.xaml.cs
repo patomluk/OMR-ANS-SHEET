@@ -29,7 +29,17 @@ namespace AnswerSheetChecker
         private Template template;
         private Action<Template.TemplateData> callback;
 
-        public AddDataGroup(Type type, Template template, Action<Template.TemplateData> f)
+        public AddDataGroup(Template template, Template.TemplateData data, Action<Template.TemplateData> f)
+        {
+            AddDataGroupInit(Type.Ans, template, data, f);
+        }
+
+        public AddDataGroup(Template template, Action<Template.TemplateData> f)
+        {
+            AddDataGroupInit(Type.Info, template, new Template.TemplateData(), f);
+        }
+
+        private void AddDataGroupInit(Type type, Template template, Template.TemplateData data, Action<Template.TemplateData> f)
         {
             this.type = type;
             this.template = template;
@@ -43,7 +53,8 @@ namespace AnswerSheetChecker
             }
             else
             {
-                TextBlockName.Text = "";
+                TextBlockName.Text = "เริ่มข้อที่";
+                TextBoxName.Text = (data.Offset + data.Count + 1).ToString();
                 TextBoxName.IsEnabled = false;
                 TextBlockNumberAns.Text = "จำนวนข้อ";
             }
@@ -108,20 +119,20 @@ namespace AnswerSheetChecker
         {
             if (int.TryParse(((TextBox)sender).Text, out int r))
             {
-                if (r < 0) ((TextBox)sender).Text = "0";
+                if (r < 0) ((TextBox)sender).Text = "1";
                 return;
             }
-            ((TextBox)sender).Text = "0";
+            ((TextBox)sender).Text = "1";
         }
 
         private void TextBoxRow_LostFocus(object sender, RoutedEventArgs e)
         {
             if (int.TryParse(((TextBox)sender).Text, out int r))
             {
-                if (r < 0) ((TextBox)sender).Text = "0";
+                if (r < 0) ((TextBox)sender).Text = "1";
                 return;
             }
-            ((TextBox)sender).Text = "0";
+            ((TextBox)sender).Text = "1";
         }
 
         private void ButtonCheck_Click(object sender, RoutedEventArgs e)
@@ -133,8 +144,8 @@ namespace AnswerSheetChecker
             }
             int w = (bool)RadioButtonVertical.IsChecked ? int.Parse(TextBoxNumberChoice.Text) : int.Parse(TextBoxNumberAns.Text);
             int h = (bool)RadioButtonVertical.IsChecked ? int.Parse(TextBoxNumberAns.Text) : int.Parse(TextBoxNumberChoice.Text);
-            int x = int.Parse(TextBoxCol.Text);
-            int y = int.Parse(TextBoxRow.Text);
+            int x = int.Parse(TextBoxCol.Text) - 1;
+            int y = int.Parse(TextBoxRow.Text) - 1;
             if (y + h > template.RowSize.Count) return;
             for (int i = y; i < y + h; i++)
             {
@@ -145,7 +156,10 @@ namespace AnswerSheetChecker
 
         private void ButtonOK_Click(object sender, RoutedEventArgs e)
         {
-            callback(new AnswerSheetChecker.Template.TemplateData(TextBoxName.Text, (bool)RadioButtonVertical.IsChecked ? AnswerSheetChecker.Template.TemplateData.Type.Vertical : AnswerSheetChecker.Template.TemplateData.Type.Horizontal, int.Parse(TextBoxNumberChoice.Text), int.Parse(TextBoxNumberAns.Text), int.Parse(TextBoxCol.Text), int.Parse(TextBoxRow.Text)));
+            if (type == Type.Info)
+                callback(new AnswerSheetChecker.Template.TemplateData(TextBoxName.Text, (bool)RadioButtonVertical.IsChecked ? AnswerSheetChecker.Template.TemplateData.Type.Vertical : AnswerSheetChecker.Template.TemplateData.Type.Horizontal, int.Parse(TextBoxNumberChoice.Text), int.Parse(TextBoxNumberAns.Text), int.Parse(TextBoxCol.Text) - 1, int.Parse(TextBoxRow.Text) - 1));
+            else
+                callback(new AnswerSheetChecker.Template.TemplateData(int.Parse(TextBoxName.Text) - 1, (bool)RadioButtonVertical.IsChecked ? AnswerSheetChecker.Template.TemplateData.Type.Vertical : AnswerSheetChecker.Template.TemplateData.Type.Horizontal, int.Parse(TextBoxNumberChoice.Text), int.Parse(TextBoxNumberAns.Text), int.Parse(TextBoxCol.Text) - 1, int.Parse(TextBoxRow.Text) - 1));
             Close();
         }
     }

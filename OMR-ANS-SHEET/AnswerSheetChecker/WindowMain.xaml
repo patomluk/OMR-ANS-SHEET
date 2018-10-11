@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AnswerSheetChecker"
         mc:Ignorable="d"
-        Title="An Answer Scoring By Image Procressing" Height="720" Width="1080">
+        Title="An Answer Scoring By Image Procressing" Height="720" Width="1080" ResizeMode="CanMinimize">
     <Grid>
         <Grid Background="#FF29ECFF" Height="72" VerticalAlignment="Top">
             <TextBlock x:Name="TextBlockNamePage" Margin="30,10,30,6" TextWrapping="Wrap" Text="ชื่อหัวข้อ" FontSize="48" FontFamily="TH Sarabun New" FontWeight="Bold"/>

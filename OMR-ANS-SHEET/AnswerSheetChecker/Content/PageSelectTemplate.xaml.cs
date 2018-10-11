@@ -20,11 +20,11 @@ namespace AnswerSheetChecker.Content
     /// </summary>
     public partial class PageSelectTemplate : Page
     {
-        Action back;
-        Action create;
-        Action load;
+        private Action back;
+        private Action<System.Drawing.Bitmap> create;
+        private Action<Template> load;
 
-        public PageSelectTemplate(TextBlock textBlockTitle, Action back, Action create, Action load)
+        public PageSelectTemplate(TextBlock textBlockTitle, Action back, Action<System.Drawing.Bitmap> create, Action<Template> load)
         {
             this.back = back;
             this.create = create;
@@ -40,12 +40,26 @@ namespace AnswerSheetChecker.Content
 
         private void ButtonCreate_Click(object sender, RoutedEventArgs e)
         {
-            create();
+            var bitmap = Helper.LoadImage("กระดาษคำตอบ");
+            if (bitmap == null) return;
+            create(bitmap);
         }
 
         private void ButtonLoad_Click(object sender, RoutedEventArgs e)
         {
-            load();
+            var opFile = new Microsoft.Win32.OpenFileDialog()
+            {
+                Title = "เรียกต้นแบบกระดาษคำตอบ",
+                Filter = "Answer Scoring Tamplate (*.ast)|*.ast",
+            };
+            if (opFile.ShowDialog() == true)
+            {
+                var template = FileSystem.TemplateFile.Load(opFile.FileName);
+                if (template != null)
+                {
+                    load(template);
+                }
+            }
         }
     }
 }

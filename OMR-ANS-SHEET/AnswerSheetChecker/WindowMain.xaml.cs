@@ -19,7 +19,8 @@ namespace AnswerSheetChecker
     /// </summary>
     public partial class WindowMain : Window
     {
-        AnswerSheetChecker.Template template;
+        Template template;
+        List<AnswerData> key;
 
         public WindowMain()
         {
@@ -36,41 +37,24 @@ namespace AnswerSheetChecker
         {
             FrameContent.Content = new Content.PageSelectTemplate(TextBlockNamePage, ()=> {
                 ShowPageHome();
-            }, ()=> {
-                var opFile = new Microsoft.Win32.OpenFileDialog()
-                {
-                    Title = "เรียกต้นแบบกระดาษคำตอบ",
-                    Filter = "Image (*.jpg *.png)|*.jpg;*.png|Adobe Portable Document Format(*.pdf)|*.pdf",
-                };
-                if (opFile.ShowDialog() == true) /* ข้อมูลตารางจากรูป*/
-                {
-                    string ext = System.IO.Path.GetExtension(opFile.FileName);
-                    System.Drawing.Bitmap bitmap = null;
-                    switch (ext)
-                    {
-                        case ".png":
-                        case ".jpg":
-                            bitmap = new System.Drawing.Bitmap(opFile.FileName);
-                            break;
-                        case ".pdf":
-                            var images = new List<System.Drawing.Image>();
-                            //var pdf = new org.pdfclown.files.File(opFile.FileName);
-                            //var renderer = new org.pdfclown.tools.Renderer();
-                            //for (int i = 0; i < pdf.Document.Pages.Count; i++) images.Add(renderer.Render(pdf.Document.Pages[i], pdf.Document.Pages[i].Size));
-                            var winSelect = new WindowSelectPage(images, (int page) => { if (page < 0) return; bitmap = new System.Drawing.Bitmap(images[page]); });
-                            winSelect.ShowDialog();
-                            break;
-                        default:
-                            break;
-                    }
-                    if (bitmap == null) return;
-                    ShowPageCreateTemplate(bitmap);
-                    //(List<OMR.PointProperty> point, List<int> rowSize) = omr.GetPositionPoint(bitmap, false);
-                    //ChangeState(PageState.KeyAnswer);
-                }
-            }, ()=> {
-
+            }, (System.Drawing.Bitmap bitmap)=> {
+                ShowPageCreateTemplate(bitmap);
+            }, (Template template)=> {
+                ShowPageEditTemplate(template);
             });
+        }
+
+        public void ShowPageEditTemplate(Template templateLoaded)
+        {
+            this.template = templateLoaded;
+            FrameContent.Content = new Content.PageCreateTemplate(TextBlockNamePage, template,
+                () => {
+                    ShowPageSelectTemplate();
+                },
+                (AnswerSheetChecker.Template template) => {
+                    this.template = template;
+                    ShowPageSelectKey();
+                });
         }
 
         public void ShowPageCreateTemplate(System.Drawing.Bitmap bitmap)
@@ -90,11 +74,47 @@ namespace AnswerSheetChecker
         {
             FrameContent.Content = new Content.PageSelectKey(TextBlockNamePage, template,
                 () => {
+                    key = null;
                     ShowPageSelectTemplate();
                 },
-                (Key key)=>{
-
+                () => {
+                    ShowPageCreateKey();
+                },
+                (List<AnswerData> key, bool save) =>{
+                    ShowPageEditKey(key, save);
                 });
+        }
+
+        public void ShowPageCreateKey()
+        {
+            FrameContent.Content = new Content.PageCreateKey(TextBlockNamePage, template, 
+            () => {
+                key = null;
+                ShowPageSelectKey();
+            },
+            (List<AnswerData> key) => {
+                this.key = key;
+                ShowPageSelectAnswer();
+            });
+        }
+
+        public void ShowPageEditKey(List<AnswerData> keyLoaded, bool save)
+        {
+            FrameContent.Content = new Content.PageCreateKey(TextBlockNamePage, template,
+            () => {
+                ShowPageSelectKey();
+            },
+            (List<AnswerData> key) => {
+                this.key = key;
+                ShowPageSelectAnswer();
+            }, keyLoaded, save);
+        }
+
+        public void ShowPageSelectAnswer()
+        {
+            FrameContent.Content = new Content.PageSelectAnswer(TextBlockNamePage, template, key, ()=> {
+                ShowPageSelectKey();
+            });
         }
     }
 }

@@ -16,6 +16,7 @@ namespace AnswerSheetChecker
                 Vertical,
             }
             public String Name { get; }
+            public int Offset { get; }
             public Type OrderType { get; }
             public int Length { get; }
             public int Count { get; }
@@ -23,6 +24,7 @@ namespace AnswerSheetChecker
             public int StartY { get; }
             public TemplateData(string name, Type type, int length, int count, int x, int y)
             {
+                Offset = 0;
                 Name = name;
                 OrderType = type;
                 Length = length;
@@ -30,9 +32,10 @@ namespace AnswerSheetChecker
                 StartX = x;
                 StartY = y;
             }
-            public TemplateData(Type type, int length, int count, int x, int y)
+            public TemplateData(int offset, Type type, int length, int count, int x, int y)
             {
                 Name = "";
+                Offset = offset;
                 OrderType = type;
                 Length = length;
                 Count = count;
@@ -47,6 +50,21 @@ namespace AnswerSheetChecker
         public List<int> RowSize { get; }
         public List<int> RowOffset { get; }
         public System.Drawing.Bitmap Image { get; }
+        public Template(System.Drawing.Bitmap image, List<OMR.PointProperty> points, List<int> row, List<TemplateData> infoData, List<TemplateData> ansData)
+        {
+            InfoData = infoData;
+            AnsData = ansData;
+            RowOffset = new List<int>();
+            Image = image;
+            PointsList = points;
+            RowSize = row;
+            int sum = 0;
+            foreach (var item in RowSize)
+            {
+                sum += item;
+                RowOffset.Add(sum);
+            }
+        }
         public Template(System.Drawing.Bitmap image, List<OMR.PointProperty> points, List<int> row)
         {
             InfoData = new List<TemplateData>();
@@ -64,25 +82,47 @@ namespace AnswerSheetChecker
         }
     }
 
-    public class Key
+    public class AnswerData
     {
-        private Dictionary<int, HashSet<int>> ans;
-        public Key()
+        public int Index { get; }
+        public int MaxChoice { get; }
+        public int Select { get { return select; } set { if (value < 0) select = 0; else if (value > MaxChoice) select = MaxChoice; else select = value; } }
+        private int select;
+        public AnswerData(int index, int max, int select = 0)
         {
-            ans = new Dictionary<int, HashSet<int>>();
+            Index = index;
+            MaxChoice = max;
+            this.select = select;
         }
-        public HashSet<int> GetAns(int n)
+    }
+
+    public class AnswerDataChecker
+    {
+        public int Index { get; }
+        public int MaxChoice { get; }
+        public int Select { get; }
+        public int Key { get; }
+        public bool Correct { get { return Key != 0 && Select == Key; } }
+        public AnswerDataChecker(int index, int max, int select, int key)
         {
-            if (ans.TryGetValue(n, out HashSet<int> value))
-            {
-                return value;
-            }
-            ans[n] = new HashSet<int>();
-            return ans[n];
+            Index = index;
+            MaxChoice = max;
+            Select = select;
+            Key = key;
         }
-        public void SetAns(int n, int c)
+    }
+
+    public class InfoData
+    {
+        public string Name { get; }
+        public int DataLength { get; }
+        public int Data { get; }
+        public string DataDisplay { get { return Data.ToString(new string('0', DataLength)); } }
+        public InfoData(string name, int len, int data)
         {
-            GetAns(n).Add(c);
+            Name = name;
+            DataLength = len;
+            Data = data;
         }
     }
 }
