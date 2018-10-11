@@ -80,15 +80,17 @@ namespace OMR
                     MyRows.Add(new MyRow(MyPoints[i]));
                 }
             }
-
+            foreach (var item in MyRows)
+            {
+                pointProperty.Add(new PointProperty(new Point((int)item.point.X, (int)item.point.Y), (int)Dist, false));
+            }
             rowSize.Add(MyRows.Count);
             if (getCheck) // check ans
             {
                 /// start
-                foreach (var item in MyRows)
+                foreach (var item in pointProperty)
                 {
-                    pointProperty.Add(new PointProperty(new Point((int)item.point.X, (int)item.point.Y), (int)Dist, false));
-                    img.Draw(new CircleF(new PointF((float)item.point.X, (float)item.point.Y), (float)item.point.Rad), new Rgb(Color.White), 9);
+                    img.Draw(new CircleF(new PointF((float)item.Position.X, (float)item.Position.Y), (float)item.Rad), new Rgb(Color.White), 9);
                 }
 
                 //for (int i = 0; i < SortRow.Count; i++)
