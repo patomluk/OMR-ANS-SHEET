@@ -60,9 +60,15 @@ namespace AnswerSheetChecker
                         int x = item.StartX;
                         int y = item.StartY;
                         if (item.OrderType == Template.TemplateData.Type.Horizontal)
+                        {
+                            x += i;
                             y += j;
+                        }
                         else
+                        {
                             x += j;
+                            y += i;
+                        }
                         if (point[template.RowOffset[y] + x].IsCheck)
                         {
                             if (select == 0)
@@ -93,9 +99,15 @@ namespace AnswerSheetChecker
                             int x = item.StartX;
                             int y = item.StartY;
                             if (item.OrderType == Template.TemplateData.Type.Horizontal)
+                            {
+                                x += i;
                                 y += j;
+                            }
                             else
+                            {
                                 x += j;
+                                y += i;
+                            }
                             if (point[template.RowOffset[y] + x].IsCheck)
                             {
                                 if (value == 0)
