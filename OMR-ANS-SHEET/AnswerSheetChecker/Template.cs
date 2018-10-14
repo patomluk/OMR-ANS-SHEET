@@ -117,9 +117,9 @@ namespace AnswerSheetChecker
     {
         public string Name { get; }
         public int DataLength { get; }
-        public int Data { get; }
+        public long Data { get; }
         public string DataDisplay { get { return Data.ToString(new string('0', DataLength)); } }
-        public InfoData(string name, int len, int data)
+        public InfoData(string name, int len, long data)
         {
             Name = name;
             DataLength = len;

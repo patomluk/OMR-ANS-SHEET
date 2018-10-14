@@ -96,17 +96,15 @@ namespace AnswerSheetChecker
                         int value = 0;
                         for (int j = 0; j < item.Length; j++)
                         {
-                            int x = item.StartX;
-                            int y = item.StartY;
+                            int x = item.StartX + (item.OrderType == Template.TemplateData.Type.Horizontal ? i : 0);
+                            int y = item.StartY + (item.OrderType == Template.TemplateData.Type.Horizontal ? 0 : i);
                             if (item.OrderType == Template.TemplateData.Type.Horizontal)
                             {
-                                x += i;
                                 y += j;
                             }
                             else
                             {
                                 x += j;
-                                y += i;
                             }
                             if (point[template.RowOffset[y] + x].IsCheck)
                             {
@@ -123,7 +121,7 @@ namespace AnswerSheetChecker
                         }
                         sum += value.ToString();
                     }
-                    info.Add(new InfoData(item.Name, item.Count, int.Parse(sum)));
+                    info.Add(new InfoData(item.Name, item.Count, long.Parse(sum)));
                 }
             }
 
