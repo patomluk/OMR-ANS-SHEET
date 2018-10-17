@@ -33,12 +33,13 @@ namespace OMR
             /////////////////////////////////////////////////////////////////////////////////////////////
             Image<Rgb, byte> img = new Image<Rgb, byte>(bitmap);
             {
-                UMat uimage = new UMat();
-                CvInvoke.CvtColor(img, uimage, ColorConversion.Bgr2Gray);
-                UMat pyrDown = new UMat();
-                CvInvoke.PyrDown(uimage, pyrDown);
-                CvInvoke.PyrUp(pyrDown, uimage);
-                CircleF[] circles = CvInvoke.HoughCircles(uimage, HoughType.Gradient, 1, 20, 20, 15, 16, 18);
+                //UMat uimage = new UMat();
+                Image<Rgb, byte> mImage = new Image<Rgb, byte>(img.Width, img.Height, new Rgb());
+                CvInvoke.CvtColor(img, mImage, ColorConversion.Bgr2Gray);
+                Image<Rgb, byte> tempImage = new Image<Rgb, byte>(img.Width, img.Height, new Rgb());
+                CvInvoke.PyrDown(mImage, tempImage);
+                CvInvoke.PyrUp(tempImage, mImage);
+                CircleF[] circles = CvInvoke.HoughCircles(mImage, HoughType.Gradient, 1, 20, 20, 15, 16, 18);
                 Image<Rgb, Byte> circleImage = img.CopyBlank();
                 var MyPoints = new List<MyPoint>();
                 for (int i = 0; i < circles.Length; i++)
@@ -91,13 +92,13 @@ namespace OMR
                     img.Draw(new CircleF(new PointF((float)item.Position.X, (float)item.Position.Y), (float)item.Rad), new Rgb(Color.White), 9);
                 }
 
-                UMat uimage = new UMat();
-                CvInvoke.CvtColor(img, uimage, ColorConversion.Rgba2Gray);
-                UMat pyrDown = new UMat();
-                CvInvoke.PyrDown(uimage, pyrDown);
-                CvInvoke.PyrUp(pyrDown, uimage);
-                CvInvoke.AdaptiveThreshold(uimage, uimage, 255, Emgu.CV.CvEnum.AdaptiveThresholdType.MeanC, Emgu.CV.CvEnum.ThresholdType.Binary, 999, 99);//149,99,79,59,39,19
-                CircleF[] circles2 = CvInvoke.HoughCircles(uimage, HoughType.Gradient, 1, 20, 20, 8, 9, 14);
+                Image<Rgb, byte> mImage = new Image<Rgb, byte>(img.Width, img.Height, new Rgb());
+                CvInvoke.CvtColor(img, mImage, ColorConversion.Rgba2Gray);
+                Image<Rgb, byte> tempImage = new Image<Rgb, byte>(img.Width, img.Height, new Rgb());
+                CvInvoke.PyrDown(mImage, tempImage);
+                CvInvoke.PyrUp(tempImage, mImage);
+                CvInvoke.AdaptiveThreshold(mImage, mImage, 255, Emgu.CV.CvEnum.AdaptiveThresholdType.MeanC, Emgu.CV.CvEnum.ThresholdType.Binary, 999, 99);//149,99,79,59,39,19
+                CircleF[] circles2 = CvInvoke.HoughCircles(mImage, HoughType.Gradient, 1, 20, 20, 8, 9, 14);
                 var AnsPoint = new List<MyPoint>();
                 for (int i = 0; i < circles2.Length; i++)
                 {
