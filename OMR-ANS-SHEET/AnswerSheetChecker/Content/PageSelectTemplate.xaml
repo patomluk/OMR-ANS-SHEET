@@ -12,9 +12,9 @@
         <Button x:Name="ButtonBack" Content="ย้อนกลับ" Margin="10,0,0,0" Height="32" VerticalAlignment="Bottom" Click="ButtonBack_Click" HorizontalAlignment="Left" Width="75"/>
         <TextBlock Margin="40,10,40,37" TextWrapping="Wrap" FontSize="20">
             สร้างต้นแบบ<LineBreak/>
-            การสร้างต้นแบบ คือ สร้างรูปแบบกระดาษคำตอบเพื่อให้ใช้กับโปรแกรม<LineBreak/><LineBreak/>
+            สร้างต้นแบบ คือ สร้างรูปแบบกระดาษคำตอบเพื่อให้ใช้กับโปรแกรม<LineBreak/><LineBreak/>
             เรียกข้อมูล<LineBreak/>
-            การเรียกข้อมูล คือ การเรียกรูปแบบกระดาษคำตอบที่ผู้ใช้เคยสร้างไว้แล้ว (.ast)
+            เรียกข้อมูล คือ เรียกรูปแบบกระดาษคำตอบที่ผู้ใช้เคยสร้างไว้แล้ว (.ast)
         </TextBlock>
         <Button x:Name="ButtonLoad" Content="เรียกข้อมูล" Margin="412,210,412,0" Height="94" VerticalAlignment="Top" Click="ButtonLoad_Click"/>
         <Button x:Name="ButtonCreate" Content="สร้างต้นแบบ" Margin="412,309,412,0" Height="94" VerticalAlignment="Top" Click="ButtonCreate_Click"/>

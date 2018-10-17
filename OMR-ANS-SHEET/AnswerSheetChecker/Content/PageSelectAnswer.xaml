@@ -14,7 +14,7 @@
 
     <Grid>
         <Button x:Name="ButtonBack" Content="ย้อนกลับ" Margin="10,0,0,0" Height="32" VerticalAlignment="Bottom" Click="ButtonBack_Click" HorizontalAlignment="Left" Width="75"/>
-        <Button x:Name="ButtonLoad" Content="เรียกกระดาษคำตอบ" Margin="814,10,10,0" Height="94" VerticalAlignment="Top" Click="ButtonLoad_Click"/>
+        <Button x:Name="ButtonLoad" Content="เรียกกระดาษคำตอบเพื่อตรวจ" Margin="814,10,10,0" Height="94" VerticalAlignment="Top" Click="ButtonLoad_Click"/>
         <DataGrid x:Name="DataGridInfo" Margin="10,10,812,0" AutoGenerateColumns="False" Height="530" VerticalAlignment="Top">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ชื่อ" Binding="{Binding Name}" IsReadOnly="True"/>
