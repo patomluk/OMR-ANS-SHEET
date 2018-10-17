@@ -10,7 +10,12 @@
 
     <Grid>
         <Button x:Name="ButtonNext" Content="ต่อไป" Margin="0,0,10,0" HorizontalAlignment="Right" Width="75" Height="32" VerticalAlignment="Bottom" Click="ButtonNext_Click"/>
-        <TextBlock Margin="10,10,10,37" TextWrapping="Wrap" Text="  โปรแกรมตรวจกระดาษคำตอบแบบหลายตัวเลือกด้วยวิธีการประมวลผลภาพ" FontSize="20"/>
+        <TextBlock Margin="10,10,10,37" TextWrapping="Wrap" Text="  โปรแกรมตรวจข้อสอบแบบปรนัยด้วยการประมวลผลภาพ 
+                   
+                   
+                   
+                   
+                                A MULTIPLE-CHOICE ANSWER SHEET SCORER BY IMAGE PROCESSING" FontSize="20"/>
 
     </Grid>
 </Page>
