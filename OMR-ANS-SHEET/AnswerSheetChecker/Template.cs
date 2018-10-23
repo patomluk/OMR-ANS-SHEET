@@ -126,4 +126,22 @@ namespace AnswerSheetChecker
             Data = data;
         }
     }
+
+    public class AnswerResultData
+    {
+        public List<InfoData> Info { get; }
+        public List<AnswerDataChecker> CheckData { get; }
+        public int Score { get; }
+        public AnswerResultData(List<InfoData> info, List<AnswerData> key, List<AnswerData> answers)
+        {
+            Info = info;
+            CheckData = new List<AnswerDataChecker>();
+            for (int i = 0; i < key.Count; i++)
+            {
+                CheckData.Add(new AnswerDataChecker(key[i].Index, key[i].MaxChoice, answers[i].Select, key[i].Select));
+            }
+            Score = 0;
+            foreach (var item in CheckData) if (item.Correct) Score++;
+        }
+    }
 }

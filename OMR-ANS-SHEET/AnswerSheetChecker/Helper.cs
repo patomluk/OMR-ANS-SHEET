@@ -13,7 +13,7 @@ namespace AnswerSheetChecker
             var opFile = new Microsoft.Win32.OpenFileDialog()
             {
                 Title = title,
-                Filter = "Image (*.jpg *.png)|*.jpg;*.png|Adobe Portable Document Format(*.pdf)|*.pdf",
+                Filter = "Image (*.jpg *.png)|*.jpg;*.png",
             };
             if (opFile.ShowDialog() == true) /* ข้อมูลตารางจากรูป*/
             {
@@ -25,20 +25,42 @@ namespace AnswerSheetChecker
                     case ".jpg":
                         bitmap = new System.Drawing.Bitmap(opFile.FileName);
                         break;
-                    case ".pdf":
-                        //var images = new List<System.Drawing.Image>();
-                        //var pdf = new org.pdfclown.files.File(opFile.FileName);
-                        //var renderer = new org.pdfclown.tools.Renderer();
-                        //for (int i = 0; i < pdf.Document.Pages.Count; i++) images.Add(renderer.Render(pdf.Document.Pages[i], pdf.Document.Pages[i].Size));
-                        //var winSelect = new WindowSelectPage(images, (int page) => { if (page < 0) return; bitmap = new System.Drawing.Bitmap(images[page]); });
-                        //winSelect.ShowDialog();
-                        break;
                     default:
                         break;
                 }
                 return bitmap;
             }
             return null;
+        }
+
+        public static List<System.Drawing.Bitmap> LoadImages(string title)
+        {
+            List<System.Drawing.Bitmap> output = new List<System.Drawing.Bitmap>();
+            var opFile = new Microsoft.Win32.OpenFileDialog()
+            {
+                Title = title,
+                Filter = "Image (*.jpg *.png)|*.jpg;*.png",
+                Multiselect = true,
+            };
+            if (opFile.ShowDialog() == true) /* ข้อมูลตารางจากรูป*/
+            {
+                foreach (var item in opFile.FileNames)
+                {
+                    string ext = System.IO.Path.GetExtension(item);
+                    System.Drawing.Bitmap bitmap = null;
+                    switch (ext)
+                    {
+                        case ".png":
+                        case ".jpg":
+                            bitmap = new System.Drawing.Bitmap(item);
+                            break;
+                        default:
+                            break;
+                    }
+                    output.Add(bitmap);
+                }
+            }
+            return output;
         }
 
         public static (List<AnswerData>, List<InfoData>) GetAnswerData(Template template, System.Drawing.Bitmap bitmap, bool getInfo = false)
