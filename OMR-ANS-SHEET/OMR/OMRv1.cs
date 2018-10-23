@@ -78,6 +78,7 @@ namespace OMR
                         MyRows.Add(new MyRow(MyPoints[i]));
                     }
                 }
+                MyRows = MyRows.OrderBy(item => item.point.X).ToList();
                 foreach (var item in MyRows)
                 {
                     pointProperty.Add(new PointProperty(new Point((int)item.point.X, (int)item.point.Y), (int)Dist, false));
