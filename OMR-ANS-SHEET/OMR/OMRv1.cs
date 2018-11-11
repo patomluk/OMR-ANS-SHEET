@@ -26,7 +26,7 @@ namespace OMR
             public MyRow(MyPoint mp) { point = mp; }
         }
 
-        (List<PointProperty> pointsList, List<int> rowSize) IOMR.GetPositionPoint(Bitmap bitmap, bool getCheck)
+        (List<PointProperty> pointsList, List<int> rowSize) IOMR.GetPositionPoint(Bitmap bitmap, int circleSize, bool getCheck)
         {
             List<PointProperty> pointProperty = new List<PointProperty>();
             List<int> rowSize = new List<int>();
@@ -99,7 +99,9 @@ namespace OMR
                 CvInvoke.PyrDown(mImage, tempImage);
                 CvInvoke.PyrUp(tempImage, mImage);
                 CvInvoke.AdaptiveThreshold(mImage, mImage, 255, Emgu.CV.CvEnum.AdaptiveThresholdType.MeanC, Emgu.CV.CvEnum.ThresholdType.Binary, 999, 99);//149,99,79,59,39,19
-                CircleF[] circles2 = CvInvoke.HoughCircles(mImage, HoughType.Gradient, 1, 20, 20, 8, 9, 14);
+                int min = circleSize - (circleSize * 15 / 100);
+                int max = circleSize + (circleSize * 15 / 100);
+                CircleF[] circles2 = CvInvoke.HoughCircles(mImage, HoughType.Gradient, 1, 20, 20, 8, min, max);
                 var AnsPoint = new List<MyPoint>();
                 for (int i = 0; i < circles2.Length; i++)
                 {

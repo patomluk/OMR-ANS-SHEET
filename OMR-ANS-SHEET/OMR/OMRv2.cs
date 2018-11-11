@@ -9,7 +9,7 @@ namespace OMR
 {
     public class OMRv2 : OMR.IOMR
     {
-        public (List<PointProperty> pointsList, List<int> rowSize) GetPositionPoint(Bitmap bitmap, bool getCheck = false)
+        public (List<PointProperty> pointsList, List<int> rowSize) GetPositionPoint(Bitmap bitmap, int circleSize, bool getCheck = false)
         {
             throw new NotImplementedException();
         }
