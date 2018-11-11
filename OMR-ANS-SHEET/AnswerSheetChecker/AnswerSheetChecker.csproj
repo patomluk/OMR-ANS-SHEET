@@ -42,9 +42,14 @@
     <Reference Include="Emgu.CV.World, Version=3.4.1.2976, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\EMGU.CV.3.4.1.2976\lib\net35\Emgu.CV.World.dll</HintPath>
     </Reference>
+    <Reference Include="EPPlus, Version=4.5.2.1, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.5.2.1\lib\net40\EPPlus.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -88,6 +93,7 @@
     <Compile Include="Content\PageSelectTemplate.xaml.cs">
       <DependentUpon>PageSelectTemplate.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FileSystem\Export.cs" />
     <Compile Include="FileSystem\KeyFile.cs" />
     <Compile Include="FileSystem\TemplateFile.cs" />
     <Compile Include="Helper.cs" />

@@ -96,5 +96,18 @@ namespace AnswerSheetChecker.Content
             currectPage++;
             ShowResult();
         }
+
+        private void ButtonExport_Click(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.SaveFileDialog saveFileDialog = new Microsoft.Win32.SaveFileDialog()
+            {
+                Title = "บันทึกผลตรวจ",
+                Filter = "Excel (*.xlsx)|*.xlsx",
+            };
+            if (saveFileDialog.ShowDialog() == true) 
+            {
+                FileSystem.Export.ToExcel(resultList, saveFileDialog.FileName);
+            }
+        }
     }
 }
