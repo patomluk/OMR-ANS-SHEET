@@ -73,6 +73,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ImageDrawing.cs" />
     <Compile Include="OMRv1.cs" />
     <Compile Include="IOMR.cs" />
     <Compile Include="OMRv2.cs" />

@@ -149,5 +149,18 @@ namespace AnswerSheetChecker
 
             return (key, info);
         }
+
+        public static List<OMR.PointProperty> AreaToPointList(int x, int y, int w, int h, Template template)
+        {
+            List<OMR.PointProperty> pointProperties = new List<OMR.PointProperty>();
+            for (int row = y; row < h + y; row++)
+            {
+                for (int col = x; col < w + x; col++)
+                {
+                    pointProperties.Add(template.PointsList[template.RowOffset[row] + col]);
+                }
+            }
+            return pointProperties;
+        }
     }
 }

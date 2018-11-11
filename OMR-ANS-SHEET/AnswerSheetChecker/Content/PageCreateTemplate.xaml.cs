@@ -25,6 +25,7 @@ namespace AnswerSheetChecker.Content
         private OMR.IOMR omr;
         private Template template;
         private bool dirty;
+        private System.Drawing.Bitmap preview;
         public PageCreateTemplate(TextBlock textBlockTitle, System.Drawing.Bitmap bitmap, Action back, Action<Template> next)
         {
             dirty = true;
@@ -38,11 +39,12 @@ namespace AnswerSheetChecker.Content
             ButtonAddAns.IsEnabled = true;
             (var list, var size) = omr.GetPositionPoint(bitmap);
             template = new Template(bitmap, list, size);
+            preview = OMR.ImageDrawing.Draw(OMR.ImageDrawing.Mode.Circle, bitmap, list, System.Drawing.Color.Black, 2);
             ImagePreview.Source = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(
-                bitmap.GetHbitmap(),
+                preview.GetHbitmap(),
                 IntPtr.Zero,
                 System.Windows.Int32Rect.Empty,
-                BitmapSizeOptions.FromWidthAndHeight(bitmap.Width, bitmap.Height));
+                BitmapSizeOptions.FromWidthAndHeight(preview.Width, preview.Height));
             CheckNext();
         }
 
@@ -61,11 +63,12 @@ namespace AnswerSheetChecker.Content
             ButtonRemoveAns.IsEnabled = false;
             DataGridInfo.ItemsSource = template.InfoData;
             DataGridAns.ItemsSource = template.AnsData;
+            preview = OMR.ImageDrawing.Draw(OMR.ImageDrawing.Mode.Circle, template.Image, template.PointsList, System.Drawing.Color.Black, 2);
             ImagePreview.Source = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(
-                template.Image.GetHbitmap(),
+                preview.GetHbitmap(),
                 IntPtr.Zero,
                 System.Windows.Int32Rect.Empty,
-                BitmapSizeOptions.FromWidthAndHeight(template.Image.Width, template.Image.Height));
+                BitmapSizeOptions.FromWidthAndHeight(preview.Width, preview.Height));
             CheckNext();
         }
 
@@ -167,6 +170,52 @@ namespace AnswerSheetChecker.Content
         private void DataGridInfo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ButtonRemoveInfo.IsEnabled = template.InfoData.Count != 0 && DataGridInfo.SelectedIndex >= 0;
+            // preview
+            System.Drawing.Bitmap preview2;
+            if (!ButtonRemoveInfo.IsEnabled)
+            {
+                preview2 = preview;
+            }
+            else
+            {
+                int x = template.InfoData[DataGridInfo.SelectedIndex].StartX;
+                int y = template.InfoData[DataGridInfo.SelectedIndex].StartY;
+                int c = template.InfoData[DataGridInfo.SelectedIndex].Count;
+                int l = template.InfoData[DataGridInfo.SelectedIndex].Length;
+                var o = template.InfoData[DataGridInfo.SelectedIndex].OrderType;
+                var pointList = Helper.AreaToPointList(x, y, o == AnswerSheetChecker.Template.TemplateData.Type.Horizontal ? c : l, o == AnswerSheetChecker.Template.TemplateData.Type.Horizontal ? l : c, template);
+                preview2 = OMR.ImageDrawing.Draw(OMR.ImageDrawing.Mode.Cross, preview, pointList, System.Drawing.Color.Blue, 3);
+            }
+            ImagePreview.Source = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(
+                    preview2.GetHbitmap(),
+                    IntPtr.Zero,
+                    System.Windows.Int32Rect.Empty,
+                    BitmapSizeOptions.FromWidthAndHeight(preview2.Width, preview2.Height));
+        }
+
+        private void DataGridAns_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var select = template.AnsData.Count != 0 && DataGridAns.SelectedIndex >= 0;
+            System.Drawing.Bitmap preview2;
+            if (!select)
+            {
+                preview2 = preview;
+            }
+            else
+            {
+                int x = template.AnsData[DataGridAns.SelectedIndex].StartX;
+                int y = template.AnsData[DataGridAns.SelectedIndex].StartY;
+                int c = template.AnsData[DataGridAns.SelectedIndex].Count;
+                int l = template.AnsData[DataGridAns.SelectedIndex].Length;
+                var o = template.AnsData[DataGridAns.SelectedIndex].OrderType;
+                var pointList = Helper.AreaToPointList(x, y, o == AnswerSheetChecker.Template.TemplateData.Type.Horizontal ? c : l, o == AnswerSheetChecker.Template.TemplateData.Type.Horizontal ? l : c, template);
+                preview2 = OMR.ImageDrawing.Draw(OMR.ImageDrawing.Mode.Cross, preview, pointList, System.Drawing.Color.Blue, 3);
+            }
+            ImagePreview.Source = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(
+                    preview2.GetHbitmap(),
+                    IntPtr.Zero,
+                    System.Windows.Int32Rect.Empty,
+                    BitmapSizeOptions.FromWidthAndHeight(preview2.Width, preview2.Height));
         }
     }
 }
