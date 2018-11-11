@@ -14,6 +14,30 @@ namespace AnswerSheetChecker.FileSystem
             using (var package = new ExcelPackage())
             {
                 var workbook = package.Workbook;
+
+                {
+                    var worksheet = workbook.Worksheets.Add("สรุป");
+                    for (int i = 0; i < resultList[0].Info.Count; i++)
+                    {
+                        worksheet.Cells[1, i + 1].Value = resultList[0].Info[i].Name;
+                    }
+                    worksheet.Cells[1, resultList[0].Info.Count + 1].Value = "คะแนน";
+                    worksheet.Cells[1, resultList[0].Info.Count + 2].Value = "เต็ม";
+                    int index = 2;
+                    foreach (var item in resultList)
+                    {
+                        for (int i = 0; i < item.Info.Count; i++)
+                        {
+                            worksheet.Cells[index, i + 1].Value = item.Info[i].DataDisplay;
+                        }
+                        int max = 0;
+                        foreach (var item2 in item.CheckData) if (item2.Key != 0) max++;
+                        worksheet.Cells[index, resultList[0].Info.Count + 1].Value = item.Score;
+                        worksheet.Cells[index, resultList[0].Info.Count + 2].Value = max;
+                        index++;
+                    }
+                }
+
                 foreach (var item in resultList)
                 {
                     var worksheet = workbook.Worksheets.Add(item.Info[0].DataDisplay);
