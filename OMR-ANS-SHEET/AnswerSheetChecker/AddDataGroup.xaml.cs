@@ -28,6 +28,7 @@ namespace AnswerSheetChecker
         private Type type;
         private Template template;
         private Action<Template.TemplateData> callback;
+        private System.Drawing.Bitmap preview;
 
         public AddDataGroup(Template template, Template.TemplateData data, Action<Template.TemplateData> f)
         {
@@ -58,11 +59,12 @@ namespace AnswerSheetChecker
                 TextBoxName.IsEnabled = false;
                 TextBlockNumberAns.Text = "จำนวนข้อ";
             }
+            preview = OMR.ImageDrawing.Draw(OMR.ImageDrawing.Mode.Circle, template.Image.Width, template.Image.Height, template.PointsList, System.Drawing.Color.Black, 2);
             ImagePreview.Source = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(
-                template.Image.GetHbitmap(),
+                preview.GetHbitmap(),
                 IntPtr.Zero,
                 System.Windows.Int32Rect.Empty,
-                BitmapSizeOptions.FromWidthAndHeight(template.Image.Width, template.Image.Height));
+                BitmapSizeOptions.FromWidthAndHeight(preview.Width, preview.Height));
         }
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
@@ -152,6 +154,14 @@ namespace AnswerSheetChecker
                 if (x + w > template.RowSize[i]) return;
             }
             ButtonOK.IsEnabled = true;
+
+            var pointProperties = Helper.AreaToPointList(x, y, w, h, template);
+            var preview2 = OMR.ImageDrawing.Draw(OMR.ImageDrawing.Mode.Cross, preview, pointProperties, System.Drawing.Color.Blue, 3);
+            ImagePreview.Source = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(
+                preview2.GetHbitmap(),
+                IntPtr.Zero,
+                System.Windows.Int32Rect.Empty,
+                BitmapSizeOptions.FromWidthAndHeight(preview2.Width, preview2.Height));
         }
 
         private void ButtonOK_Click(object sender, RoutedEventArgs e)

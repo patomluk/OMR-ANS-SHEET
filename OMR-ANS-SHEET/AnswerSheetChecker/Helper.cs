@@ -66,7 +66,7 @@ namespace AnswerSheetChecker
         public static (List<AnswerData>, List<InfoData>) GetAnswerData(Template template, System.Drawing.Bitmap bitmap, bool getInfo = false)
         {
             OMR.IOMR omr = new OMR.OMRv1();
-            (List<OMR.PointProperty> point, List<int> rowSize) = omr.GetPositionPoint(bitmap, true);
+            (List<OMR.PointProperty> point, List<int> rowSize) = omr.GetPositionPoint(bitmap, 12, true);
             if (point.Count != template.PointsList.Count || rowSize.Count != template.RowSize.Count) return (null, null);
             for (int i = 0; i < rowSize.Count; i++) if (rowSize[i] != template.RowSize[i]) return (null, null);
 
@@ -148,6 +148,19 @@ namespace AnswerSheetChecker
             }
 
             return (key, info);
+        }
+
+        public static List<OMR.PointProperty> AreaToPointList(int x, int y, int w, int h, Template template)
+        {
+            List<OMR.PointProperty> pointProperties = new List<OMR.PointProperty>();
+            for (int row = y; row < h + y; row++)
+            {
+                for (int col = x; col < w + x; col++)
+                {
+                    pointProperties.Add(template.PointsList[template.RowOffset[row] + col]);
+                }
+            }
+            return pointProperties;
         }
     }
 }

@@ -30,7 +30,7 @@
                 <DataGridTextColumn Header="เริ่มแถวที่" Binding="{Binding StartY, Converter={StaticResource HumanNumberConverter}}" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid x:Name="DataGridAns" Margin="555,293,10,37" AutoGenerateColumns="False" SelectionMode="Single">
+        <DataGrid x:Name="DataGridAns" Margin="555,293,10,37" AutoGenerateColumns="False" SelectionMode="Single" SelectionChanged="DataGridAns_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="เริ่มข้อที่" Binding="{Binding Offset, Converter={StaticResource HumanNumberConverter}}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="รูปแบบการเรียงข้อมูล" Binding="{Binding OrderType, Converter={StaticResource OrderTypeConverter}}" IsReadOnly="True"/>
