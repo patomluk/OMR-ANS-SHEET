@@ -14,6 +14,6 @@ namespace OMR
 
     public interface IOMR
     {
-        (List<PointProperty> pointsList, List<int> rowSize) GetPositionPoint(Bitmap bitmap, int circleSize = 12, bool getCheck = false);
+        (List<PointProperty> pointsList, List<int> rowSize) GetPositionPoint(Bitmap bitmap, int circleSize = 16, bool getCheck = false);
     }
 }

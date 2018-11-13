@@ -17,6 +17,7 @@ namespace AnswerSheetChecker.FileSystem
             ROW_SIZE,
             INFO_DATA,
             ANS_DATA,
+            CIRCLE_SIZE,
         }
 
         static public void Save(Template template, string path)
@@ -77,10 +78,14 @@ namespace AnswerSheetChecker.FileSystem
                 binaryWriter.Write(item.StartY);
             }
 
+            binaryWriter.Write((int)Header.CIRCLE_SIZE);
+            binaryWriter.Write(template.CircleSize);
+
             binaryWriter.Close();
         }
         static public Template Load(string path)
         {
+            int circleSize = 16;
             System.Drawing.Bitmap bitmap = null;
             List<OMR.PointProperty> pointsList = new List<OMR.PointProperty>();
             List<int> rowSize = new List<int>();
@@ -151,13 +156,18 @@ namespace AnswerSheetChecker.FileSystem
                             }
                         }
                         break;
+                    case Header.CIRCLE_SIZE:
+                        {
+                            circleSize = binaryReader.ReadInt32();
+                        }
+                        break;
                     default:
                         break;
                 }
             }
 
             if (bitmap == null || pointsList.Count == 0 || rowSize.Count == 0 || ansData.Count == 0) return null;
-            return new Template(bitmap, pointsList, rowSize, infoData, ansData);
+            return new Template(bitmap, circleSize, pointsList, rowSize, infoData, ansData);
         }
     }
 }
