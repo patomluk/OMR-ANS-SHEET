@@ -39,7 +39,9 @@ namespace OMR
                 Image<Rgb, byte> tempImage = new Image<Rgb, byte>(img.Width, img.Height, new Rgb());
                 CvInvoke.PyrDown(mImage, tempImage);
                 CvInvoke.PyrUp(tempImage, mImage);
-                CircleF[] circles = CvInvoke.HoughCircles(mImage, HoughType.Gradient, 1, 20, 20, 15, 16, 18);
+                int min = circleSize - (circleSize * 15 / 100);
+                int max = circleSize + (circleSize * 15 / 100);
+                CircleF[] circles = CvInvoke.HoughCircles(mImage, HoughType.Gradient, 1, 20, 20, 15, min, max);
                 Image<Rgb, Byte> circleImage = img.CopyBlank();
                 var MyPoints = new List<MyPoint>();
                 for (int i = 0; i < circles.Length; i++)

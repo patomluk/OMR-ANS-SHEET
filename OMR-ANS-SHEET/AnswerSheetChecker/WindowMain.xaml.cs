@@ -38,7 +38,7 @@ namespace AnswerSheetChecker
             FrameContent.Content = new Content.PageSelectTemplate(TextBlockNamePage, ()=> {
                 ShowPageHome();
             }, (System.Drawing.Bitmap bitmap)=> {
-                ShowPageCreateTemplate(bitmap);
+                ShowWindowCalibrateSize(bitmap);
             }, (Template template)=> {
                 ShowPageEditTemplate(template);
             });
@@ -57,10 +57,18 @@ namespace AnswerSheetChecker
                 });
         }
 
-        public void ShowPageCreateTemplate(System.Drawing.Bitmap bitmap)
+        public void ShowWindowCalibrateSize(System.Drawing.Bitmap bitmap)
+        {
+            var page = new CalibrateSize(bitmap, (int size) => {
+                ShowPageCreateTemplate(bitmap, size);
+            });
+            page.ShowDialog();
+        }
+
+        public void ShowPageCreateTemplate(System.Drawing.Bitmap bitmap, int circleSize)
         {
             template = null;
-            FrameContent.Content = new Content.PageCreateTemplate(TextBlockNamePage, bitmap, 
+            FrameContent.Content = new Content.PageCreateTemplate(TextBlockNamePage, bitmap, circleSize,
                 () =>{
                     ShowPageSelectTemplate();
                 },

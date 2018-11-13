@@ -26,7 +26,7 @@ namespace AnswerSheetChecker.Content
         private Template template;
         private bool dirty;
         private System.Drawing.Bitmap preview;
-        public PageCreateTemplate(TextBlock textBlockTitle, System.Drawing.Bitmap bitmap, Action back, Action<Template> next)
+        public PageCreateTemplate(TextBlock textBlockTitle, System.Drawing.Bitmap bitmap, int circleSize, Action back, Action<Template> next)
         {
             dirty = true;
             textBlockTitle.Text = "สร้างรูปแบบกระดาษคำตอบ";
@@ -37,8 +37,8 @@ namespace AnswerSheetChecker.Content
             ButtonEdit.Visibility = Visibility.Hidden;
             ButtonAddInfo.IsEnabled = true;
             ButtonAddAns.IsEnabled = true;
-            (var list, var size) = omr.GetPositionPoint(bitmap);
-            template = new Template(bitmap, list, size);
+            (var list, var size) = omr.GetPositionPoint(bitmap, circleSize);
+            template = new Template(bitmap, circleSize, list, size);
             preview = OMR.ImageDrawing.Draw(OMR.ImageDrawing.Mode.Circle, bitmap, list, System.Drawing.Color.Black, 2);
             ImagePreview.Source = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(
                 preview.GetHbitmap(),
