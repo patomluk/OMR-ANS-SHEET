@@ -6,12 +6,12 @@
         xmlns:local="clr-namespace:AnswerSheetChecker"
         mc:Ignorable="d"
         Title="เลือกหน้าที่ต้องการ" Height="720" Width="800
-        " ResizeMode="NoResize" Closing="Window_Closing">
+        " ResizeMode="NoResize" Closing="Window_Closing" FontFamily="TH Sarabun New" FontSize="14">
     <Grid>
         <Button x:Name="ButtonSelect" Content="ตกลง" Margin="0,0,10,10" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Click="ButtonSelect_Click"/>
         <TextBlock x:Name="TextBlockPage" HorizontalAlignment="Center" Margin="0,0,0,10" TextWrapping="Wrap" Text="0/0" VerticalAlignment="Bottom" Height="20" Width="50" TextAlignment="Center"/>
-        <Button x:Name="ButtonNext" Content="ต่อไป" HorizontalAlignment="Left" Margin="427,0,0,10" VerticalAlignment="Bottom" Width="74" Click="ButtonNext_Click"/>
-        <Button x:Name="ButtonPrevious" Content="ก่อนหน้า" HorizontalAlignment="Right" Margin="0,0,427,10" VerticalAlignment="Bottom" Width="74" Click="ButtonPrevious_Click"/>
+        <Button x:Name="ButtonNext" Content="ต่อไป" HorizontalAlignment="Left" Margin="427,0,0,10" VerticalAlignment="Bottom" Width="74" Click="ButtonNext_Click" FontWeight="Bold"/>
+        <Button x:Name="ButtonPrevious" Content="ก่อนหน้า" HorizontalAlignment="Right" Margin="0,0,427,10" VerticalAlignment="Bottom" Width="74" Click="ButtonPrevious_Click" FontWeight="Bold"/>
         <Image x:Name="ImagePreview" Margin="10,10,10,35"/>
     </Grid>
 </Window>

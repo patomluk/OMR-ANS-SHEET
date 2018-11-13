@@ -12,16 +12,16 @@
         <local:DataConverterHumanStartNumber x:Key="HumanNumberConverter"></local:DataConverterHumanStartNumber>
     </Page.Resources>
     <Grid>
-        <Button x:Name="ButtonBack" Content="ย้อนกลับ" Margin="10,0,0,0" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="75" Click="ButtonBack_Click"/>
-        <Button x:Name="ButtonNext" Content="ต่อไป" Margin="0,0,10,0" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Click="ButtonNext_Click"/>
-        <Button x:Name="ButtonEdit" Content="แก้ไข" Margin="0,0,90,0" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Click="ButtonEdit_Click"/>
+        <Button x:Name="ButtonBack" Content="ย้อนกลับ" Margin="10,0,0,0" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="75" Click="ButtonBack_Click" FontFamily="TH Sarabun New" FontSize="16" FontWeight="Bold"/>
+        <Button x:Name="ButtonNext" Content="ต่อไป" Margin="0,0,10,0" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Click="ButtonNext_Click" FontFamily="TH Sarabun New" FontSize="16" FontWeight="Bold"/>
+        <Button x:Name="ButtonEdit" Content="แก้ไข" Margin="0,0,90,0" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Click="ButtonEdit_Click" FontFamily="TH Sarabun New" FontSize="16" FontWeight="Bold"/>
         <Image x:Name="ImagePreview" Margin="10,10,554,37" MouseLeftButtonDown="ImagePreview_MouseLeftButtonDown"/>
         <Border BorderBrush="Black" BorderThickness="1" Margin="10,10,530,37"/>
-        <Button x:Name="ButtonAddInfo" Content="เพิ่มชุดข้อมูล" Margin="555,10,0,0" VerticalAlignment="Top" Height="28" HorizontalAlignment="Left" Width="90" Click="ButtonAddInfo_Click"/>
-        <Button x:Name="ButtonAddAns" Content="เพิ่มชุดคำตอบ" Margin="555,260,0,0" VerticalAlignment="Top" Height="28" HorizontalAlignment="Left" Width="90" Click="ButtonAddAns_Click"/>
-        <Button x:Name="ButtonRemoveInfo" Content="ลบชุดข้อมูล" Margin="650,10,0,0" VerticalAlignment="Top" Height="28" HorizontalAlignment="Left" Width="90" Click="ButtonRemoveInfo_Click"/>
-        <Button x:Name="ButtonRemoveAns" Content="ลบชุดคำตอบ" Margin="650,260,0,0" VerticalAlignment="Top" Height="28" HorizontalAlignment="Left" Width="90" Click="ButtonRemoveAns_Click"/>
-        <DataGrid x:Name="DataGridInfo" Margin="555,43,10,0" Height="200" VerticalAlignment="Top" AutoGenerateColumns="False" SelectionMode="Single" SelectionChanged="DataGridInfo_SelectionChanged">
+        <Button x:Name="ButtonAddInfo" Content="เพิ่มชุดข้อมูล" Margin="555,10,0,0" VerticalAlignment="Top" Height="28" HorizontalAlignment="Left" Width="90" Click="ButtonAddInfo_Click" FontFamily="TH Sarabun New" FontSize="16" FontWeight="Bold"/>
+        <Button x:Name="ButtonAddAns" Content="เพิ่มชุดคำตอบ" Margin="555,260,0,0" VerticalAlignment="Top" Height="28" HorizontalAlignment="Left" Width="90" Click="ButtonAddAns_Click" FontFamily="TH Sarabun New" FontSize="16" FontWeight="Bold"/>
+        <Button x:Name="ButtonRemoveInfo" Content="ลบชุดข้อมูล" Margin="650,10,0,0" VerticalAlignment="Top" Height="28" HorizontalAlignment="Left" Width="90" Click="ButtonRemoveInfo_Click" FontFamily="TH Sarabun New" FontSize="16" FontWeight="Bold"/>
+        <Button x:Name="ButtonRemoveAns" Content="ลบชุดคำตอบ" Margin="650,260,0,0" VerticalAlignment="Top" Height="28" HorizontalAlignment="Left" Width="90" Click="ButtonRemoveAns_Click" FontFamily="TH Sarabun New" FontSize="16" FontWeight="Bold"/>
+        <DataGrid x:Name="DataGridInfo" Margin="555,43,10,0" Height="200" VerticalAlignment="Top" AutoGenerateColumns="False" SelectionMode="Single" SelectionChanged="DataGridInfo_SelectionChanged" FontFamily="TH Sarabun New" FontSize="16" FontWeight="Bold">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ชื่อ" Binding="{Binding Name}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="รูปแบบการเรียงข้อมูล" Binding="{Binding OrderType, Converter={StaticResource OrderTypeConverter}}" IsReadOnly="True"/>
@@ -30,7 +30,7 @@
                 <DataGridTextColumn Header="เริ่มแถวที่" Binding="{Binding StartY, Converter={StaticResource HumanNumberConverter}}" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid x:Name="DataGridAns" Margin="555,293,10,37" AutoGenerateColumns="False" SelectionMode="Single" SelectionChanged="DataGridAns_SelectionChanged">
+        <DataGrid x:Name="DataGridAns" Margin="555,293,10,37" AutoGenerateColumns="False" SelectionMode="Single" SelectionChanged="DataGridAns_SelectionChanged" FontFamily="TH Sarabun New" FontSize="16" FontWeight="Bold">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="เริ่มข้อที่" Binding="{Binding Offset, Converter={StaticResource HumanNumberConverter}}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="รูปแบบการเรียงข้อมูล" Binding="{Binding OrderType, Converter={StaticResource OrderTypeConverter}}" IsReadOnly="True"/>

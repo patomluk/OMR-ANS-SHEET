@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AnswerSheetChecker"
         mc:Ignorable="d"
-        Title="CalibrateSize" Height="720" Width="1028">
+        Title="CalibrateSize" Height="720" Width="1028" FontFamily="TH Sarabun New" FontSize="16" FontWeight="Bold">
     <Grid>
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="600" Margin="10,10,0,0" VerticalAlignment="Top" Width="480">
             <Image x:Name="ImageOrigin" Margin="0,0,0,0"/>
@@ -13,8 +13,9 @@
         <Border BorderBrush="Black" BorderThickness="1" Height="600" Margin="0,10,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="480">
             <Image x:Name="ImagePreview" Margin="0,0,0,0"/>
         </Border>
-        <Button x:Name="ButtonOK" Content="เสร็จสิ้น" Margin="0,0,10,10" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="119" Click="ButtonOK_Click"/>
-        <Button x:Name="ButtonCheck" Content="ตรวจสอบ" Margin="0,615,371,0" HorizontalAlignment="Right" Width="119" Click="ButtonCheck_Click" Height="20" VerticalAlignment="Top"/>
-        <TextBox x:Name="TextBoxSize" HorizontalAlignment="Left" Height="20" Margin="370,615,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="120" PreviewTextInput="NumberValidationTextBox" TextChanged="TextBoxSize_TextChanged" LostFocus="TextBoxSize_LostFocus"/>
+        <Button x:Name="ButtonOK" Content="เสร็จสิ้น" Margin="0,0,10,10" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="119" Click="ButtonOK_Click" FontFamily="TH Sarabun New" FontSize="14" FontWeight="Bold"/>
+        <Button x:Name="ButtonCheck" Content="ตรวจสอบ" Margin="0,615,371,0" HorizontalAlignment="Right" Width="119" Click="ButtonCheck_Click" Height="20" VerticalAlignment="Top" FontFamily="TH Sarabun New" FontSize="16" FontWeight="Bold"/>
+        <TextBox x:Name="TextBoxSize" HorizontalAlignment="Left" Height="20" Margin="370,615,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="120" PreviewTextInput="NumberValidationTextBox" TextChanged="TextBoxSize_TextChanged" LostFocus="TextBoxSize_LostFocus" FontFamily="TH Sarabun New" FontSize="16"/>
+        <TextBox HorizontalAlignment="Left" Height="20" Margin="194,615,0,0" TextWrapping="Wrap" Text="ระบุขนาดของวงกลมเพื่อตรวจสอบ" VerticalAlignment="Top" Width="162" FontFamily="TH Sarabun New" FontSize="16" FontWeight="Bold" AllowDrop="True" Opacity="0.995" BorderBrush="{x:Null}"/>
     </Grid>
 </Window>

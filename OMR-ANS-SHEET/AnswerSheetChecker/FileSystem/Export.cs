@@ -22,7 +22,7 @@ namespace AnswerSheetChecker.FileSystem
                         worksheet.Cells[1, i + 1].Value = resultList[0].Info[i].Name;
                     }
                     worksheet.Cells[1, resultList[0].Info.Count + 1].Value = "ได้คะแนน";
-                    worksheet.Cells[1, resultList[0].Info.Count + 2].Value = "คะแนนเต็มเต็ม";
+                    worksheet.Cells[1, resultList[0].Info.Count + 2].Value = "คะแนนเต็ม";
                     int index = 2;
                     foreach (var item in resultList)
                     {

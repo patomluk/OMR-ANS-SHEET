@@ -9,8 +9,8 @@
       Title="PageHome">
 
     <Grid>
-        <Button x:Name="ButtonNext" Content="ต่อไป" Margin="0,0,10,0" HorizontalAlignment="Right" Width="75" Height="32" VerticalAlignment="Bottom" Click="ButtonNext_Click"/>
-        <TextBlock Margin="40,10,40,37" TextWrapping="Wrap" FontSize="20">
+        <Button x:Name="ButtonNext" Content="ต่อไป" Margin="0,0,10,0" HorizontalAlignment="Right" Width="75" Height="32" VerticalAlignment="Bottom" Click="ButtonNext_Click" FontFamily="TH Sarabun New" FontSize="16" FontWeight="Bold"/>
+        <TextBlock Margin="40,10,40,37" TextWrapping="Wrap" FontSize="22" FontFamily="TH Sarabun New" FontWeight="Bold">
             โปรแกรมตรวจกระดาษคำตอบแบบหลายตัวเลือกด้วยวิธีการประมวลผลภาพ<LineBreak/>
             A MULTIPLE-CHOICE ANSWER SHEET SCORER BY IMAGE PROCESSING<LineBreak/>
         </TextBlock>
