@@ -45,6 +45,13 @@ namespace OMR
             }
         }
 
+        public static System.Drawing.Bitmap DrawText(System.Drawing.Bitmap bitmap, int x, int y, string msg, System.Drawing.Color color, int size)
+        {
+            Image<Rgb, byte> img = new Image<Rgb, byte>(bitmap);
+            img.Draw(msg, new System.Drawing.Point(x, y), FontFace.HersheyPlain, size, new Rgb(color), 5);
+            return img.Bitmap;
+        }
+
         private static Image<Rgb, byte> DrawCircle(Image<Rgb, byte> image, List<PointProperty> pointsList, Rgb rgb, int size)
         {
             foreach (var item in pointsList) image.Draw(new CircleF(new System.Drawing.PointF(item.Position.X, item.Position.Y), item.Rad), rgb, size);

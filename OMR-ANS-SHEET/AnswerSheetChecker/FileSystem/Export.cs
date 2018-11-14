@@ -9,7 +9,7 @@ namespace AnswerSheetChecker.FileSystem
 {
     public class Export
     {
-        public static void ToExcel(List<AnswerResultData> resultList, string fileName)
+        public static void ToExcel(List<AnswerResultData> resultList, Template template, string fileName)
         {
             using (var package = new ExcelPackage())
             {
@@ -67,6 +67,38 @@ namespace AnswerSheetChecker.FileSystem
                         worksheet.Cells["I" + (i + 2)].Value = item.Info[i].Name;
                         worksheet.Cells["J" + (i + 2)].Value = item.Info[i].DataDisplay;
                     }
+
+                    List<OMR.PointProperty> c = new List<OMR.PointProperty>();
+                    List<OMR.PointProperty> ic = new List<OMR.PointProperty>();
+                    for (int i = 0; i < item.CheckData.Count; i++)
+                    {
+                        int index = item.CheckData[i].Index;
+                        int select = item.CheckData[i].Key - 1;
+                        if (select < 0) continue;
+
+                        foreach (var ans in template.AnsData)
+                        {
+                            if (index >= ans.Offset && index < ans.Count)
+                            {
+                                int x = ans.StartX + select;
+                                int y = ans.StartY + ans.Offset + index;
+                                var point = template.PointsList[template.RowOffset[y] + x];
+                                if (item.CheckData[i].Correct)
+                                    c.Add(point);
+                                else
+                                    ic.Add(point);
+                                break;
+                            }
+                        }
+                    }
+                    var preview = OMR.ImageDrawing.Draw(OMR.ImageDrawing.Mode.Circle, template.Image, c, System.Drawing.Color.Green, 5);
+                    preview = OMR.ImageDrawing.Draw(OMR.ImageDrawing.Mode.Circle, preview, ic, System.Drawing.Color.Red, 2);
+                    var score = item.Score + "/" + maxScore;
+                    int fontSize = 5;
+                    preview = OMR.ImageDrawing.DrawText(preview, preview.Width - fontSize * score.Length * 15, fontSize * 15, score, System.Drawing.Color.Blue, fontSize);
+
+                    var img = worksheet.Drawings.AddPicture("sheet", preview);
+                    img.SetPosition(0, 0, 14, 0);
                 }
                 package.SaveAs(new System.IO.FileInfo(fileName));
             }
