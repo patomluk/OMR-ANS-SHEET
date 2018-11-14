@@ -66,7 +66,7 @@ namespace AnswerSheetChecker
         public static (List<AnswerData>, List<InfoData>) GetAnswerData(Template template, System.Drawing.Bitmap bitmap, bool getInfo = false)
         {
             OMR.IOMR omr = new OMR.OMRv1();
-            (List<OMR.PointProperty> point, List<int> rowSize) = omr.GetPositionPoint(bitmap, template.CircleSize, true);
+            (List<OMR.PointProperty> point, List<int> rowSize) = omr.GetPositionPoint(bitmap, bitmap.Width * template.CircleSize / template.Image.Width, true);
             if (point.Count != template.PointsList.Count || rowSize.Count != template.RowSize.Count) return (null, null);
             for (int i = 0; i < rowSize.Count; i++) if (rowSize[i] != template.RowSize[i]) return (null, null);
 
