@@ -106,7 +106,7 @@ namespace AnswerSheetChecker.Content
             };
             if (saveFileDialog.ShowDialog() == true) 
             {
-                FileSystem.Export.ToExcel(resultList, saveFileDialog.FileName);
+                FileSystem.Export.ToExcel(resultList, template, saveFileDialog.FileName);
             }
         }
     }
