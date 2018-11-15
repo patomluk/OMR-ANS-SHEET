@@ -12,7 +12,7 @@
         <Button x:Name="ButtonBack" Content="ย้อนกลับ" Margin="10,0,0,0" Height="32" VerticalAlignment="Bottom" Click="ButtonBack_Click" HorizontalAlignment="Left" Width="75" FontFamily="TH Sarabun New" FontSize="16" FontWeight="Bold"/>
         <TextBlock Margin="40,10,40,37" TextWrapping="Wrap" FontSize="24" FontFamily="TH Sarabun New" FontWeight="Bold">
             <LineBreak/>
-            เรียกข้อมูล คือ เรียกใช้เฉลยคำตอบที่ผู้ใช้เคยสร้างไว้แล้ว (.ask) <LineBreak/>
+            เรียกข้อมูล คือ เรียกใช้เฉลยคำตอบที่ผู้ใช้เคยสร้างไว้แล้ว (.ask)    <LineBreak/>
             สร้างเฉลยด้วยกระดาษคำตอบ คือ การอ่านเฉลยจากกระดาษคำตอบที่ฝนแล้ว<LineBreak/>
             สร้างเฉลยด้วยตนเอง คือ ให้ผู้ใช้งานใส่เฉลยคำตอบลงในฟอร์มเฉลย
         </TextBlock>
