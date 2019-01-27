@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -137,8 +137,10 @@ namespace AnswerSheetChecker
         public List<InfoData> Info { get; }
         public List<AnswerDataChecker> CheckData { get; }
         public int Score { get; }
-        public AnswerResultData(List<InfoData> info, List<AnswerData> key, List<AnswerData> answers)
+        public System.Drawing.Bitmap Image { get; }
+        public AnswerResultData(List<InfoData> info, List<AnswerData> key, List<AnswerData> answers, System.Drawing.Bitmap image)
         {
+            Image = image;
             Info = info;
             CheckData = new List<AnswerDataChecker>();
             for (int i = 0; i < key.Count; i++)

@@ -106,7 +106,7 @@ namespace AnswerSheetChecker.FileSystem
                             }
                         }
                     }
-                    var preview = OMR.ImageDrawing.Draw(OMR.ImageDrawing.Mode.Circle, template.Image, c, System.Drawing.Color.Green, 5);
+                    var preview = OMR.ImageDrawing.Draw(OMR.ImageDrawing.Mode.Circle, item.Image, c, System.Drawing.Color.Green, 5);
                     preview = OMR.ImageDrawing.Draw(OMR.ImageDrawing.Mode.Circle, preview, ic, System.Drawing.Color.Red, 2);
                     var score = item.Score + "/" + maxScore;
                     int fontSize = 5;
