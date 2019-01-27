@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -40,7 +40,22 @@ namespace AnswerSheetChecker.FileSystem
 
                 foreach (var item in resultList)
                 {
-                    var worksheet = workbook.Worksheets.Add(item.Info[0].DataDisplay);
+                    ExcelWorksheet worksheet = null;
+                    int count = 0;
+                    while (worksheet == null)
+                    {
+                        try
+                        {
+                            if (count == 0)
+                                worksheet = workbook.Worksheets.Add(item.Info[0].DataDisplay);
+                            else
+                                worksheet = workbook.Worksheets.Add(item.Info[0].DataDisplay + " (" + count + ")");
+                        }
+                        catch (Exception)
+                        {
+                            count++;
+                        }
+                    }
                     worksheet.Cells["A1"].Value = "ข้อที่";
                     worksheet.Cells["B1"].Value = "ตอบ";
                     worksheet.Cells["C1"].Value = "เฉลย";
