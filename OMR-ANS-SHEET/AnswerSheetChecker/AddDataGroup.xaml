@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AnswerSheetChecker"
         mc:Ignorable="d"
-        Title="AddDataGroup" Height="720" Width="710" ResizeMode="NoResize">
+        Title="AddDataGroup" Height="720" Width="710" ResizeMode="NoResize" FontFamily="TH Sarabun New" FontSize="16" FontWeight="Bold">
     <Grid>
         <Image x:Name="ImagePreview" Margin="10,10,152,10"/>
         <Border BorderBrush="Black" BorderThickness="1" Margin="10,10,152,10"/>

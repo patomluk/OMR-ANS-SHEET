@@ -9,14 +9,15 @@
       Title="PageSelectKey">
 
     <Grid>
-        <Button x:Name="ButtonBack" Content="ย้อนกลับ" Margin="10,0,0,0" Height="32" VerticalAlignment="Bottom" Click="ButtonBack_Click" HorizontalAlignment="Left" Width="75"/>
-        <TextBlock Margin="40,10,40,37" TextWrapping="Wrap" FontSize="20">
-            สร้างเฉลยด้วยกระดาษคำตอบ คือ <LineBreak/><LineBreak/>
-            สร้างเฉลยด้วยตนเอง คือ <LineBreak/><LineBreak/>
-            เรียกข้อมูล คือ เรียกใช้เฉลยคำตอบที่ผู้ใช้เคยสร้างไว้แล้ว (.ask)
+        <Button x:Name="ButtonBack" Content="ย้อนกลับ" Margin="10,0,0,0" Height="32" VerticalAlignment="Bottom" Click="ButtonBack_Click" HorizontalAlignment="Left" Width="75" FontFamily="TH Sarabun New" FontSize="16" FontWeight="Bold"/>
+        <TextBlock Margin="40,10,40,37" TextWrapping="Wrap" FontSize="24" FontFamily="TH Sarabun New" FontWeight="Bold">
+            <LineBreak/>
+            เรียกข้อมูล คือ เรียกใช้เฉลยคำตอบที่ผู้ใช้เคยสร้างไว้แล้ว (.ask) <LineBreak/>
+            สร้างเฉลยด้วยกระดาษคำตอบ คือ การอ่านเฉลยจากกระดาษคำตอบที่ฝนแล้ว<LineBreak/>
+            สร้างเฉลยด้วยตนเอง คือ ให้ผู้ใช้งานใส่เฉลยคำตอบลงในฟอร์มเฉลย
         </TextBlock>
-        <Button x:Name="ButtonLoad" Content="เรียกข้อมูล" Margin="412,210,412,0" Height="94" VerticalAlignment="Top" Click="ButtonLoad_Click"/>
-        <Button x:Name="ButtonCreate" Content="สร้างเฉลยด้วยกระดาษคำตอบ" Margin="412,309,412,0" Height="94" VerticalAlignment="Top" Click="ButtonCreate_Click"/>
-        <Button x:Name="ButtonMake" Content="สร้างเฉลยด้วยตนเอง" Margin="412,408,412,0" Height="94" VerticalAlignment="Top" Click="ButtonMake_Click"/>
+        <Button x:Name="ButtonLoad" Content="เรียกข้อมูล" Margin="412,210,412,0" Height="94" VerticalAlignment="Top" Click="ButtonLoad_Click" FontFamily="TH Sarabun New" FontSize="16" FontWeight="Bold"/>
+        <Button x:Name="ButtonCreate" Content="สร้างเฉลยด้วยกระดาษคำตอบ" Margin="412,309,412,0" Height="94" VerticalAlignment="Top" Click="ButtonCreate_Click" FontFamily="TH Sarabun New" FontSize="16" FontWeight="Bold"/>
+        <Button x:Name="ButtonMake" Content="สร้างเฉลยด้วยตนเอง" Margin="412,408,412,0" Height="94" VerticalAlignment="Top" Click="ButtonMake_Click" FontFamily="TH Sarabun New" FontSize="16" FontWeight="Bold"/>
     </Grid>
 </Page>

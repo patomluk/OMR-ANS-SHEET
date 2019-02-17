@@ -21,8 +21,8 @@ namespace AnswerSheetChecker.FileSystem
                     {
                         worksheet.Cells[1, i + 1].Value = resultList[0].Info[i].Name;
                     }
-                    worksheet.Cells[1, resultList[0].Info.Count + 1].Value = "คะแนน";
-                    worksheet.Cells[1, resultList[0].Info.Count + 2].Value = "เต็ม";
+                    worksheet.Cells[1, resultList[0].Info.Count + 1].Value = "ได้คะแนน";
+                    worksheet.Cells[1, resultList[0].Info.Count + 2].Value = "คะแนนเต็ม";
                     int index = 2;
                     foreach (var item in resultList)
                     {
@@ -70,8 +70,8 @@ namespace AnswerSheetChecker.FileSystem
                         worksheet.Cells["D" + (i + 2)].Value = item.CheckData[i].Correct ? 1 : 0;
                         if (item.CheckData[i].Key > 0) maxScore++;
                     }
-                    worksheet.Cells["F1"].Value = "คะแนน";
-                    worksheet.Cells["G1"].Value = "เต็ม";
+                    worksheet.Cells["F1"].Value = "ได้คะแนน";
+                    worksheet.Cells["G1"].Value = "คะแนนเต็ม";
                     worksheet.Cells["F2"].Value = item.Score;
                     worksheet.Cells["G2"].Value = maxScore;
 
