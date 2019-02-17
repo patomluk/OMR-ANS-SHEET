@@ -93,10 +93,10 @@ namespace AnswerSheetChecker.FileSystem
 
                         foreach (var ans in template.AnsData)
                         {
-                            if (index >= ans.Offset && index < ans.Count)
+                            if (index > ans.Offset && index < ans.Offset + ans.Count)
                             {
                                 int x = ans.StartX + select;
-                                int y = ans.StartY + ans.Offset + index;
+                                int y = ans.StartY + index - ans.Offset;
                                 var point = template.PointsList[template.RowOffset[y] + x];
                                 if (item.CheckData[i].Correct)
                                     c.Add(point);
