@@ -111,6 +111,9 @@ namespace AnswerSheetChecker.FileSystem
                     var score = item.Score + "/" + maxScore;
                     int fontSize = 5;
                     preview = OMR.ImageDrawing.DrawText(preview, preview.Width - fontSize * score.Length * 15, fontSize * 15, score, System.Drawing.Color.Blue, fontSize);
+                    // scale
+                    float scale = 800f / preview.Width;
+                    preview = new System.Drawing.Bitmap(preview, (int)(preview.Width * scale), (int)(preview.Height * scale));
 
                     var img = worksheet.Drawings.AddPicture("sheet", preview);
                     img.SetPosition(0, 0, 14, 0);
