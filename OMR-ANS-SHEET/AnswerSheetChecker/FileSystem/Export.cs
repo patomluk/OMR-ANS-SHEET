@@ -93,7 +93,7 @@ namespace AnswerSheetChecker.FileSystem
 
                         foreach (var ans in template.AnsData)
                         {
-                            if (index > ans.Offset && index < ans.Offset + ans.Count)
+                            if (index >= ans.Offset && index < ans.Offset + ans.Count)
                             {
                                 int x = ans.StartX + select;
                                 int y = ans.StartY + index - ans.Offset;
