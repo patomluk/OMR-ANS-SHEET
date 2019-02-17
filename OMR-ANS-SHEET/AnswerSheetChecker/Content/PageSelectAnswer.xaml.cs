@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -52,7 +52,7 @@ namespace AnswerSheetChecker.Content
             {
                 (var ansData, var info) = Helper.GetAnswerData(template, item, true);
                 if (ansData == null) continue;
-                var result = new AnswerResultData(info, key, ansData);
+                var result = new AnswerResultData(info, key, ansData, item);
                 resultList.Add(result);
             }
             currectPage = 0;

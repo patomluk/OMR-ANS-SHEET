@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -40,7 +40,22 @@ namespace AnswerSheetChecker.FileSystem
 
                 foreach (var item in resultList)
                 {
-                    var worksheet = workbook.Worksheets.Add(item.Info[0].DataDisplay);
+                    ExcelWorksheet worksheet = null;
+                    int count = 0;
+                    while (worksheet == null)
+                    {
+                        try
+                        {
+                            if (count == 0)
+                                worksheet = workbook.Worksheets.Add(item.Info[0].DataDisplay);
+                            else
+                                worksheet = workbook.Worksheets.Add(item.Info[0].DataDisplay + " (" + count + ")");
+                        }
+                        catch (Exception)
+                        {
+                            count++;
+                        }
+                    }
                     worksheet.Cells["A1"].Value = "ข้อที่";
                     worksheet.Cells["B1"].Value = "ตอบ";
                     worksheet.Cells["C1"].Value = "เฉลย";
@@ -78,10 +93,10 @@ namespace AnswerSheetChecker.FileSystem
 
                         foreach (var ans in template.AnsData)
                         {
-                            if (index >= ans.Offset && index < ans.Count)
+                            if (index > ans.Offset && index < ans.Offset + ans.Count)
                             {
                                 int x = ans.StartX + select;
-                                int y = ans.StartY + ans.Offset + index;
+                                int y = ans.StartY + index - ans.Offset;
                                 var point = template.PointsList[template.RowOffset[y] + x];
                                 if (item.CheckData[i].Correct)
                                     c.Add(point);
@@ -91,11 +106,14 @@ namespace AnswerSheetChecker.FileSystem
                             }
                         }
                     }
-                    var preview = OMR.ImageDrawing.Draw(OMR.ImageDrawing.Mode.Circle, template.Image, c, System.Drawing.Color.Green, 5);
+                    var preview = OMR.ImageDrawing.Draw(OMR.ImageDrawing.Mode.Circle, item.Image, c, System.Drawing.Color.Green, 5);
                     preview = OMR.ImageDrawing.Draw(OMR.ImageDrawing.Mode.Circle, preview, ic, System.Drawing.Color.Red, 2);
                     var score = item.Score + "/" + maxScore;
                     int fontSize = 5;
                     preview = OMR.ImageDrawing.DrawText(preview, preview.Width - fontSize * score.Length * 15, fontSize * 15, score, System.Drawing.Color.Blue, fontSize);
+                    // scale
+                    float scale = 800f / preview.Width;
+                    preview = new System.Drawing.Bitmap(preview, (int)(preview.Width * scale), (int)(preview.Height * scale));
 
                     var img = worksheet.Drawings.AddPicture("sheet", preview);
                     img.SetPosition(0, 0, 14, 0);
