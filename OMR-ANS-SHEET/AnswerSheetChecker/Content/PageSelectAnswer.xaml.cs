@@ -50,10 +50,18 @@ namespace AnswerSheetChecker.Content
             resultList = new List<AnswerResultData>();
             foreach (var item in bitmap)
             {
-                (var ansData, var info) = Helper.GetAnswerData(template, item, true);
-                if (ansData == null) continue;
-                var result = new AnswerResultData(info, key, ansData, item);
-                resultList.Add(result);
+                try
+                {
+                    (var ansData, var info) = Helper.GetAnswerData(template, item, true);
+                    if (ansData == null) continue;
+                    var result = new AnswerResultData(info, key, ansData, item);
+                    resultList.Add(result);
+                }
+                catch (Exception)
+                {
+                    var result = new AnswerResultData(new List<InfoData>(), key, new List<AnswerData>(), item);
+                    resultList.Add(result);
+                }
             }
             currectPage = 0;
             ShowResult();
